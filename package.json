@@ -1,0 +1,24 @@
+{
+  "name": "undraw",
+  "version": "0.0.1",
+  "description": "Undraw illustrations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dance2die/undraw.git"
+  },
+  "keywords": [
+    "undraw",
+    "illustration",
+    "search"
+  ],
+  "author": "Sung M. Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dance2die/undraw/issues"
+  },
+  "homepage": "https://github.com/dance2die/undraw#readme"
+}
