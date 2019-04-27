@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { FixedSizeGrid as Grid } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 
+import './index.scss'
+
 const log = console.log
 
 log(`hi`)
