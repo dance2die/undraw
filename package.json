@@ -4,6 +4,7 @@
   "description": "Undraw illustrations",
   "main": "index.js",
   "scripts": {
+    "start": "parcel ./public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/dance2die/undraw/issues"
   },
-  "homepage": "https://github.com/dance2die/undraw#readme"
+  "homepage": "https://github.com/dance2die/undraw#readme",
+  "dependencies": {
+    "react": "^16",
+    "react-dom": "^16",
+    "react-virtualized-auto-sizer": "1.0.2",
+    "react-window": "^1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.19.0"
+  }
 }
