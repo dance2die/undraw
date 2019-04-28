@@ -41,20 +41,13 @@ const log = console.log
 // )
 const imageWidth = 375
 const imageHeight = 280
-const getColumnCount = (width, height) => 3
-const getWidth = width => imageWidth
-const getHeight = height => imageHeight
+const getColumnCount = width => ~~(width / imageWidth)
+const getWidth = width =>
+  Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
+const getHeight = width => imageHeight
 
-const Cell = (width, height) => ({ rowIndex, columnIndex, style }) => {
-  log(
-    `cell rowIndex, columnIndex, style`,
-    rowIndex,
-    columnIndex,
-    style,
-    width,
-    height
-  )
-  const columnCount = getColumnCount(width, height)
+const Cell = width => ({ rowIndex, columnIndex, style }) => {
+  const columnCount = getColumnCount(width)
   const index = columnCount * rowIndex + columnIndex
 
   return (
@@ -73,12 +66,12 @@ const Example = () => (
         className='Grid'
         height={height}
         width={width}
-        columnCount={getColumnCount(width, height)}
-        rowCount={names.length / getColumnCount(width, height)}
+        columnCount={getColumnCount(width)}
+        rowCount={names.length / getColumnCount(width)}
         columnWidth={getWidth(width)}
-        rowHeight={getHeight(height)}
+        rowHeight={getHeight(width)}
       >
-        {Cell(width, height)}
+        {Cell(width)}
       </Grid>
     )}
   </AutoSizer>

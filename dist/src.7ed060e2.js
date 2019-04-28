@@ -28327,25 +28327,24 @@ var log = console.log; // log(`hi`, names)
 var imageWidth = 375;
 var imageHeight = 280;
 
-var getColumnCount = function getColumnCount(width, height) {
-  return 3;
+var getColumnCount = function getColumnCount(width) {
+  return ~~(width / imageWidth);
 };
 
 var getWidth = function getWidth(width) {
-  return imageWidth;
+  return Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10;
 };
 
-var getHeight = function getHeight(height) {
+var getHeight = function getHeight(width) {
   return imageHeight;
 };
 
-var Cell = function Cell(width, height) {
+var Cell = function Cell(width) {
   return function (_ref) {
     var rowIndex = _ref.rowIndex,
         columnIndex = _ref.columnIndex,
         style = _ref.style;
-    log("cell rowIndex, columnIndex, style", rowIndex, columnIndex, style, width, height);
-    var columnCount = getColumnCount(width, height);
+    var columnCount = getColumnCount(width);
     var index = columnCount * rowIndex + columnIndex;
     return _react.default.createElement("img", {
       style: style,
@@ -28363,11 +28362,11 @@ var Example = function Example() {
       className: "Grid",
       height: height,
       width: width,
-      columnCount: getColumnCount(width, height),
-      rowCount: _names.default.length / getColumnCount(width, height),
+      columnCount: getColumnCount(width),
+      rowCount: _names.default.length / getColumnCount(width),
       columnWidth: getWidth(width),
-      rowHeight: getHeight(height)
-    }, Cell(width, height));
+      rowHeight: getHeight(width)
+    }, Cell(width));
   });
 };
 
