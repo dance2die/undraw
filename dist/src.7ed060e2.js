@@ -28297,33 +28297,77 @@ require("./index.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var log = console.log; // log(`hi`, names)
+// const Cell2 = ({ index, style }) => (
+//   <img
+//     style={style}
+//     src={`../images/undraw/${names[index]}`}
+//     alt={`${names[index]}`}
+//   />
+// )
+// const getItemSize = (width, height) => {
+//   // log(`getItemsSize ${width}x${height}`)
+//   return width / 5
+// }
+// const Example = () => (
+//   <AutoSizer>
+//     {({ height, width }) => (
+//       <List
+//         className='List'
+//         height={height}
+//         width={width}
+//         itemCount={names.length}
+//         itemSize={getItemSize(width, height)}
+//       >
+//         {Cell2}
+//       </List>
+//     )}
+//   </AutoSizer>
+// )
 
-var Cell2 = function Cell2(_ref) {
-  var index = _ref.index,
-      style = _ref.style;
-  return _react.default.createElement("img", {
-    style: style,
-    src: "../images/undraw/".concat(_names.default[index]),
-    alt: "".concat(_names.default[index])
-  });
+var imageWidth = 375;
+var imageHeight = 280;
+
+var getColumnCount = function getColumnCount(width, height) {
+  return 3;
 };
 
-var getItemSize = function getItemSize(width, height) {
-  // log(`getItemsSize ${width}x${height}`)
-  return width / 5;
+var getWidth = function getWidth(width) {
+  return imageWidth;
+};
+
+var getHeight = function getHeight(height) {
+  return imageHeight;
+};
+
+var Cell = function Cell(width, height) {
+  return function (_ref) {
+    var rowIndex = _ref.rowIndex,
+        columnIndex = _ref.columnIndex,
+        style = _ref.style;
+    log("cell rowIndex, columnIndex, style", rowIndex, columnIndex, style, width, height);
+    var columnCount = getColumnCount(width, height);
+    var index = columnCount * rowIndex + columnIndex;
+    return _react.default.createElement("img", {
+      style: style,
+      src: "../images/undraw/".concat(_names.default[index]),
+      alt: "".concat(_names.default[index])
+    });
+  };
 };
 
 var Example = function Example() {
   return _react.default.createElement(_reactVirtualizedAutoSizer.default, null, function (_ref2) {
-    var height = _ref2.height,
-        width = _ref2.width;
-    return _react.default.createElement(_reactWindow.FixedSizeList, {
-      className: "List",
+    var width = _ref2.width,
+        height = _ref2.height;
+    return _react.default.createElement(_reactWindow.FixedSizeGrid, {
+      className: "Grid",
       height: height,
       width: width,
-      itemCount: _names.default.length,
-      itemSize: getItemSize(width, height)
-    }, Cell2);
+      columnCount: getColumnCount(width, height),
+      rowCount: _names.default.length / getColumnCount(width, height),
+      columnWidth: getWidth(width),
+      rowHeight: getHeight(height)
+    }, Cell(width, height));
   });
 };
 
@@ -28395,7 +28439,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34547" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38307" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

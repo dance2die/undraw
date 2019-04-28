@@ -11,31 +11,75 @@ const log = console.log
 
 // log(`hi`, names)
 
-const Cell2 = ({ index, style }) => (
-  <img
-    style={style}
-    src={`../images/undraw/${names[index]}`}
-    alt={`${names[index]}`}
-  />
-)
+// const Cell2 = ({ index, style }) => (
+//   <img
+//     style={style}
+//     src={`../images/undraw/${names[index]}`}
+//     alt={`${names[index]}`}
+//   />
+// )
 
-const getItemSize = (width, height) => {
-  // log(`getItemsSize ${width}x${height}`)
-  return width / 5
+// const getItemSize = (width, height) => {
+//   // log(`getItemsSize ${width}x${height}`)
+//   return width / 5
+// }
+
+// const Example = () => (
+//   <AutoSizer>
+//     {({ height, width }) => (
+//       <List
+//         className='List'
+//         height={height}
+//         width={width}
+//         itemCount={names.length}
+//         itemSize={getItemSize(width, height)}
+//       >
+//         {Cell2}
+//       </List>
+//     )}
+//   </AutoSizer>
+// )
+const imageWidth = 375
+const imageHeight = 280
+const getColumnCount = (width, height) => 3
+const getWidth = width => imageWidth
+const getHeight = height => imageHeight
+
+const Cell = (width, height) => ({ rowIndex, columnIndex, style }) => {
+  log(
+    `cell rowIndex, columnIndex, style`,
+    rowIndex,
+    columnIndex,
+    style,
+    width,
+    height
+  )
+  const columnCount = getColumnCount(width, height)
+  const index = columnCount * rowIndex + columnIndex
+
+  return (
+    <img
+      style={style}
+      src={`../images/undraw/${names[index]}`}
+      alt={`${names[index]}`}
+    />
+  )
 }
 
 const Example = () => (
   <AutoSizer>
-    {({ height, width }) => (
-      <List
-        className='List'
+    {({ width, height }) => (
+      <Grid
+        className='Grid'
         height={height}
         width={width}
-        itemCount={names.length}
-        itemSize={getItemSize(width, height)}
+        columnCount={getColumnCount(width, height)}
+        rowCount={names.length / getColumnCount(width, height)}
+        columnWidth={getWidth(width)}
+        rowHeight={getHeight(height)}
       >
-        {Cell2}
-      </List>
+        {Cell(width, height)}
+      </Grid>
     )}
   </AutoSizer>
 )
