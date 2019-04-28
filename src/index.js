@@ -9,7 +9,7 @@ import './index.scss'
 
 const log = console.log
 
-log(`hi`, names)
+// log(`hi`, names)
 
 const Cell2 = ({ index, style }) => (
   <img
@@ -19,6 +19,11 @@ const Cell2 = ({ index, style }) => (
   />
 )
 
+const getItemSize = (width, height) => {
+  // log(`getItemsSize ${width}x${height}`)
+  return width / 5
+}
+
 const Example = () => (
   <AutoSizer>
     {({ height, width }) => (
@@ -27,13 +32,26 @@ const Example = () => (
         height={height}
         width={width}
         itemCount={names.length}
-        itemSize={200}
+        itemSize={getItemSize(width, height)}
       >
         {Cell2}
       </List>
     )}
   </AutoSizer>
 )
+
+function App() {
+  return (
+    <>
+      <header>
+        <h1 className='title'>Search here!</h1>
+      </header>
+      <main>
+        <Example />
+      </main>
+    </>
+  )
+}
 
 // const Cell = ({ columnIndex, rowIndex, style }) => (
 //   <div
@@ -69,4 +87,4 @@ const Example = () => (
 //   </AutoSizer>
 // )
 
-render(<Example />, document.getElementById('root'))
+render(<App />, document.getElementById('root'))

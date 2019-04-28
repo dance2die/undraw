@@ -28296,8 +28296,7 @@ require("./index.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var log = console.log;
-log("hi", _names.default);
+var log = console.log; // log(`hi`, names)
 
 var Cell2 = function Cell2(_ref) {
   var index = _ref.index,
@@ -28309,6 +28308,11 @@ var Cell2 = function Cell2(_ref) {
   });
 };
 
+var getItemSize = function getItemSize(width, height) {
+  // log(`getItemsSize ${width}x${height}`)
+  return width / 5;
+};
+
 var Example = function Example() {
   return _react.default.createElement(_reactVirtualizedAutoSizer.default, null, function (_ref2) {
     var height = _ref2.height,
@@ -28318,10 +28322,16 @@ var Example = function Example() {
       height: height,
       width: width,
       itemCount: _names.default.length,
-      itemSize: 200
+      itemSize: getItemSize(width, height)
     }, Cell2);
   });
-}; // const Cell = ({ columnIndex, rowIndex, style }) => (
+};
+
+function App() {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement("h1", {
+    className: "title"
+  }, "Search here!")), _react.default.createElement("main", null, _react.default.createElement(Example, null)));
+} // const Cell = ({ columnIndex, rowIndex, style }) => (
 //   <div
 //     className={
 //       columnIndex % 2
@@ -28356,7 +28366,7 @@ var Example = function Example() {
 // )
 
 
-(0, _reactDom.render)(_react.default.createElement(Example, null), document.getElementById('root'));
+(0, _reactDom.render)(_react.default.createElement(App, null), document.getElementById('root'));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-window":"../node_modules/react-window/dist/index.esm.js","react-virtualized-auto-sizer":"../node_modules/react-virtualized-auto-sizer/dist/index.esm.js","./names":"../src/names.js","./index.scss":"../src/index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -28385,7 +28395,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33587" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34547" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
