@@ -75,8 +75,7 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
-    const hasNoResult =
-      query && words && query.length === 0 && words.length === 0
+    const hasNoResult = !query || (query.length === 0 && words.length === 0)
     setFileNames(hasNoResult ? names : words)
   }
 

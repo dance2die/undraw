@@ -28428,7 +28428,7 @@ function App() {
     var query = e.target.value;
     e.preventDefault();
     var words = trie.search(query);
-    var hasNoResult = query && words && query.length === 0 && words.length === 0;
+    var hasNoResult = !query || query.length === 0 && words.length === 0;
     setFileNames(hasNoResult ? _names.default : words);
   };
 
