@@ -2,22 +2,16 @@ import React, { useState, createContext, useContext } from 'react'
 import { render } from 'react-dom'
 import { FixedSizeGrid as Grid, FixedSizeList as List } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import useTrie from '@cshooks/usetrie'
 
 import names from './names'
-import useTrie from '@cshooks/usetrie'
+import { getColumnCount, getWidth, getHeight } from './utils'
 
 import './index.scss'
 
 const log = console.log
 
 const FileNamesContext = createContext()
-
-const imageWidth = 375
-const imageHeight = 280
-const getColumnCount = width => ~~(width / imageWidth)
-const getWidth = width =>
-  Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
-const getHeight = width => imageHeight
 
 const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)
@@ -81,7 +75,8 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
-    const hasNoResult = query.length === 0 && words.length === 0
+    const hasNoResult =
+      query && words && query.length === 0 && words.length === 0
     setFileNames(hasNoResult ? names : words)
   }
 
