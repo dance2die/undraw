@@ -23,14 +23,19 @@ const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)
 
   const columnCount = getColumnCount(width)
+  log(`cell columnCount=${columnCount}`)
   const index = columnCount * rowIndex + columnIndex
 
   return (
-    <img
-      style={style}
-      src={`../images/undraw/${fileNames[index]}`}
-      alt={`${fileNames[index]}`}
-    />
+    <>
+      {fileNames[index] && (
+        <img
+          style={style}
+          src={`../images/undraw/${fileNames[index]}`}
+          alt={`${fileNames[index]}`}
+        />
+      )}
+    </>
   )
 }
 
@@ -65,6 +70,7 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
+    log(`query=${query}`, words)
     setFileNames(words.length === 0 ? names : words)
   }
 

@@ -28334,12 +28334,13 @@ var Cell = function Cell(width) {
         style = _ref.style;
     var fileNames = (0, _react.useContext)(FileNamesContext);
     var columnCount = getColumnCount(width);
+    log("cell columnCount=".concat(columnCount));
     var index = columnCount * rowIndex + columnIndex;
-    return _react.default.createElement("img", {
+    return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement("img", {
       style: style,
       src: "../images/undraw/".concat(fileNames[index]),
       alt: "".concat(fileNames[index])
-    });
+    }));
   };
 };
 
@@ -28372,6 +28373,7 @@ function App() {
     var query = e.target.value;
     e.preventDefault();
     var words = trie.search(query);
+    log("query=".concat(query), words);
     setFileNames(words.length === 0 ? _names.default : words);
   };
 
@@ -28419,7 +28421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36971" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42153" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
