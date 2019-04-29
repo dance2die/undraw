@@ -70,14 +70,13 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
-    // log(`query=${query}`, words)
     setFileNames(query.length === 0 && words.length === 0 ? names : words)
   }
 
   return (
     <FileNamesContext.Provider value={fileNames}>
       <section className='search'>
-        <h1 className='title'>Search here!</h1>
+        <h1 className='title'>Search Images</h1>
         <form onSubmit={filterByQuery}>
           <input type='text' onChange={filterByQuery} placeholder='Search' />
         </form>

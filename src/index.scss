@@ -7,24 +7,45 @@ body,
   /* overflow-x: auto; */
 }
 
-.Grid {
-  /* border: 1px solid #d9dddd; */
-}
+// .Grid {
+//   /* border: 1px solid #d9dddd; */
+// }
 
-.GridItemEven,
-.GridItemOdd {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .GridItemEven,
+// .GridItemOdd {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-.GridItemEven {
-  background-color: #f8f8f0;
+// .GridItemEven {
+//   background-color: #f8f8f0;
+// }
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 .search {
   background-color: antiquewhite;
   height: 25vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & h1 {
+    margin-bottom: 2rem;
+  }
+
+  & input[type='text'] {
+    width: 45vw;
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 0.5rem;
+  }
 
   &.title {
     font-size: 3rem;

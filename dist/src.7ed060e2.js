@@ -28372,8 +28372,7 @@ function App() {
   var filterByQuery = function filterByQuery(e) {
     var query = e.target.value;
     e.preventDefault();
-    var words = trie.search(query); // log(`query=${query}`, words)
-
+    var words = trie.search(query);
     setFileNames(query.length === 0 && words.length === 0 ? _names.default : words);
   };
 
@@ -28383,7 +28382,7 @@ function App() {
     className: "search"
   }, _react.default.createElement("h1", {
     className: "title"
-  }, "Search here!"), _react.default.createElement("form", {
+  }, "Search Images"), _react.default.createElement("form", {
     onSubmit: filterByQuery
   }, _react.default.createElement("input", {
     type: "text",
@@ -28421,7 +28420,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46117" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44163" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
