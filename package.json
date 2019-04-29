@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/dance2die/undraw#readme",
   "dependencies": {
+    "@cshooks/usetrie": "^1.0.8",
     "react": "^16",
     "react-dom": "^16",
     "react-virtualized-auto-sizer": "1.0.2",
