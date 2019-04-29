@@ -23,7 +23,7 @@ const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)
 
   const columnCount = getColumnCount(width)
-  log(`cell columnCount=${columnCount}`)
+  // log(`cell columnCount=${columnCount}`)
   const index = columnCount * rowIndex + columnIndex
 
   return (
@@ -70,8 +70,8 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
-    log(`query=${query}`, words)
-    setFileNames(words.length === 0 ? names : words)
+    // log(`query=${query}`, words)
+    setFileNames(query.length === 0 && words.length === 0 ? names : words)
   }
 
   return (

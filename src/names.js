@@ -390,7 +390,6 @@ export default [
   'multitasking.svg',
   'music.svg',
   'my_password.svg',
-  'names.txt',
   'navigation.svg',
   'nerd.svg',
   'new_message.svg',
