@@ -28361,6 +28361,21 @@ var Images = function Images() {
   });
 };
 
+function Search(_ref3) {
+  var filterByQuery = _ref3.filterByQuery;
+  return _react.default.createElement("section", {
+    className: "search"
+  }, _react.default.createElement("h1", {
+    className: "title"
+  }, "Search Images"), _react.default.createElement("form", {
+    onSubmit: filterByQuery
+  }, _react.default.createElement("input", {
+    type: "text",
+    onChange: filterByQuery,
+    placeholder: "Search"
+  })));
+}
+
 function App() {
   var trie = (0, _usetrie.default)(_names.default);
 
@@ -28373,22 +28388,15 @@ function App() {
     var query = e.target.value;
     e.preventDefault();
     var words = trie.search(query);
-    setFileNames(query.length === 0 && words.length === 0 ? _names.default : words);
+    var hasNoResult = query.length === 0 && words.length === 0;
+    setFileNames(hasNoResult ? _names.default : words);
   };
 
   return _react.default.createElement(FileNamesContext.Provider, {
     value: fileNames
-  }, _react.default.createElement("section", {
-    className: "search"
-  }, _react.default.createElement("h1", {
-    className: "title"
-  }, "Search Images"), _react.default.createElement("form", {
-    onSubmit: filterByQuery
-  }, _react.default.createElement("input", {
-    type: "text",
-    onChange: filterByQuery,
-    placeholder: "Search"
-  }))), _react.default.createElement("main", null, _react.default.createElement(Images, null)));
+  }, _react.default.createElement(Search, {
+    filterByQuery: filterByQuery
+  }), _react.default.createElement("main", null, _react.default.createElement(Images, null)));
 }
 
 (0, _reactDom.render)(_react.default.createElement(App, null), document.getElementById('root'));

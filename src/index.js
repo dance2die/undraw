@@ -61,6 +61,17 @@ const Images = () => {
   )
 }
 
+function Search({ filterByQuery }) {
+  return (
+    <section className='search'>
+      <h1 className='title'>Search Images</h1>
+      <form onSubmit={filterByQuery}>
+        <input type='text' onChange={filterByQuery} placeholder='Search' />
+      </form>
+    </section>
+  )
+}
+
 function App() {
   const trie = useTrie(names)
   const [fileNames, setFileNames] = useState(names)
@@ -70,17 +81,13 @@ function App() {
     e.preventDefault()
 
     const words = trie.search(query)
-    setFileNames(query.length === 0 && words.length === 0 ? names : words)
+    const hasNoResult = query.length === 0 && words.length === 0
+    setFileNames(hasNoResult ? names : words)
   }
 
   return (
     <FileNamesContext.Provider value={fileNames}>
-      <section className='search'>
-        <h1 className='title'>Search Images</h1>
-        <form onSubmit={filterByQuery}>
-          <input type='text' onChange={filterByQuery} placeholder='Search' />
-        </form>
-      </section>
+      <Search filterByQuery={filterByQuery} />
       <main>
         <Images />
       </main>
