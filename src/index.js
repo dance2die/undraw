@@ -4,12 +4,15 @@ import { FixedSizeGrid as Grid, FixedSizeList as List } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import useTrie from '@cshooks/usetrie'
 
-import names from './names'
+// import localNames from './localNames'
 import { getColumnCount, getWidth, getHeight } from './utils'
+import localNames from './data/undraw-local.json'
 
 import './index.scss'
 
 const log = console.log
+
+log(`localNames`, localNames)
 
 const FileNamesContext = createContext()
 
@@ -25,7 +28,7 @@ const Cell = width => ({ rowIndex, columnIndex, style }) => {
       {fileNames[index] && (
         <img
           style={style}
-          src={`../images/undraw/${fileNames[index]}`}
+          src={`../images/svg/${fileNames[index]}`}
           alt={`${fileNames[index]}`}
         />
       )}
@@ -67,6 +70,7 @@ function Search({ filterByQuery }) {
 }
 
 function App() {
+  const names = localNames.map(o => o.image)
   const trie = useTrie(names)
   const [fileNames, setFileNames] = useState(names)
 
