@@ -30130,8 +30130,8 @@ var Images = function Images() {
       width: width,
       columnCount: (0, _utils.getColumnCount)(width),
       rowCount: fileNames.length / (0, _utils.getColumnCount)(width),
-      columnWidth: (0, _utils.getWidth)(width),
-      rowHeight: (0, _utils.getHeight)(width)
+      columnWidth: (0, _utils.getWidth)(width) - 10,
+      rowHeight: (0, _utils.getHeight)(width) - 10
     }, (0, _Cell.default)(width));
   }), !hasFiles && _react.default.createElement(_NoResult.default, null));
 };

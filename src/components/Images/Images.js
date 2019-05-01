@@ -22,8 +22,8 @@ const Images = () => {
               width={width}
               columnCount={getColumnCount(width)}
               rowCount={fileNames.length / getColumnCount(width)}
-              columnWidth={getWidth(width)}
-              rowHeight={getHeight(width)}
+              columnWidth={getWidth(width) - 10}
+              rowHeight={getHeight(width) - 10}
             >
               {Cell(width)}
             </Grid>
