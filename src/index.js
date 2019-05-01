@@ -1,18 +1,16 @@
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { render } from 'react-dom'
-import { FixedSizeGrid as Grid, FixedSizeList } from 'react-window'
+import { FixedSizeGrid as Grid } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import useTrie from '@cshooks/usetrie'
 
-// import localNames from './localNames'
 import { getColumnCount, getWidth, getHeight, normalize } from './utils'
 import localNames from './data/undraw-local.json'
+import FileNamesContext from './FileNamesContext'
 
 import './index.scss'
 
 const log = console.log
-
-const FileNamesContext = createContext()
 
 const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)

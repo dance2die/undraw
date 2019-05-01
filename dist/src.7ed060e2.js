@@ -29953,7 +29953,20 @@ module.exports = [{
   "title": "Credit card",
   "tags": "credit card, money, banks, bitcoin, plastic, chip, buy, sell, payments, transactions, swipe, stripe, braintree"
 }];
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{}],"../src/FileNamesContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var FileNamesContext = (0, _react.createContext)();
+var _default = FileNamesContext;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -30042,6 +30055,8 @@ var _utils = require("./utils");
 
 var _undrawLocal = _interopRequireDefault(require("./data/undraw-local.json"));
 
+var _FileNamesContext = _interopRequireDefault(require("./FileNamesContext"));
+
 require("./index.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -30065,14 +30080,13 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var log = console.log;
-var FileNamesContext = (0, _react.createContext)();
 
 var Cell = function Cell(width) {
   return function (_ref) {
     var rowIndex = _ref.rowIndex,
         columnIndex = _ref.columnIndex,
         style = _ref.style;
-    var fileNames = (0, _react.useContext)(FileNamesContext);
+    var fileNames = (0, _react.useContext)(_FileNamesContext.default);
     var columnCount = (0, _utils.getColumnCount)(width);
     var index = columnCount * rowIndex + columnIndex;
     return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement("img", {
@@ -30084,7 +30098,7 @@ var Cell = function Cell(width) {
 };
 
 var Images = function Images() {
-  var fileNames = (0, _react.useContext)(FileNamesContext);
+  var fileNames = (0, _react.useContext)(_FileNamesContext.default);
   return _react.default.createElement(_reactVirtualizedAutoSizer.default, null, function (_ref2) {
     var width = _ref2.width,
         height = _ref2.height;
@@ -30144,7 +30158,7 @@ function App() {
     setFileNames(hasNoResult ? allNames : fileNames);
   };
 
-  return _react.default.createElement(FileNamesContext.Provider, {
+  return _react.default.createElement(_FileNamesContext.default.Provider, {
     value: fileNames
   }, _react.default.createElement(Search, {
     filterByQuery: filterByQuery
@@ -30152,7 +30166,7 @@ function App() {
 }
 
 (0, _reactDom.render)(_react.default.createElement(App, null), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-window":"../node_modules/react-window/dist/index.esm.js","react-virtualized-auto-sizer":"../node_modules/react-virtualized-auto-sizer/dist/index.esm.js","@cshooks/usetrie":"../node_modules/@cshooks/usetrie/lib/index.js","./utils":"../src/utils/index.js","./data/undraw-local.json":"../src/data/undraw-local.json","./index.scss":"../src/index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-window":"../node_modules/react-window/dist/index.esm.js","react-virtualized-auto-sizer":"../node_modules/react-virtualized-auto-sizer/dist/index.esm.js","@cshooks/usetrie":"../node_modules/@cshooks/usetrie/lib/index.js","./utils":"../src/utils/index.js","./data/undraw-local.json":"../src/data/undraw-local.json","./FileNamesContext":"../src/FileNamesContext.js","./index.scss":"../src/index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
