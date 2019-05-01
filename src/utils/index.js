@@ -32,6 +32,7 @@ function normalize(localNames) {
       localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
     ),
   ]
+
   return tags.map(tag => {
     return {
       type: tag,
@@ -41,6 +42,7 @@ function normalize(localNames) {
           .map(o => ({
             image: o.image,
             title: o.title,
+            tags: o.tags,
           })),
       ],
     }

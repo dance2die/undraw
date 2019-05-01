@@ -25827,7 +25827,8 @@ function normalize(localNames) {
       }).map(function (o) {
         return {
           image: o.image,
-          title: o.title
+          title: o.title,
+          tags: o.tags
         };
       }))
     };
@@ -30015,12 +30016,19 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Image = function Image(_ref) {
   var style = _ref.style,
-      src = _ref.src;
-  return _react.default.createElement("img", {
+      _ref$file = _ref.file,
+      image = _ref$file.image,
+      tags = _ref$file.tags,
+      title = _ref$file.title;
+  return _react.default.createElement("section", {
+    className: "image"
+  }, _react.default.createElement("img", {
     style: style,
-    src: src,
-    alt: src
-  });
+    src: "../images/svg/".concat(image),
+    alt: title
+  }), _react.default.createElement("div", {
+    className: "overlay"
+  }, tags));
 };
 
 var Cell = function Cell(width) {
@@ -30033,7 +30041,7 @@ var Cell = function Cell(width) {
     var index = columnCount * rowIndex + columnIndex;
     return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement(Image, {
       style: style,
-      src: "../images/svg/".concat(fileNames[index])
+      file: fileNames[index]
     }));
   };
 };
@@ -30245,7 +30253,7 @@ function App() {
     return o.type;
   });
 
-  var _useState = (0, _react.useState)(allNames),
+  var _useState = (0, _react.useState)(_undrawLocal.default),
       _useState2 = _slicedToArray(_useState, 2),
       fileNames = _useState2[0],
       setFileNames = _useState2[1];
@@ -30254,14 +30262,12 @@ function App() {
     e.preventDefault();
     var query = e.target.value;
     if (!query) return;
-    var searchResult = trie.search(query);
-    var fileNames = searchResult.reduce(function (acc, o) {
-      return acc.concat.apply(acc, _toConsumableArray(o.payload.map(function (name) {
-        return name.image;
-      })));
+    var found = trie.search(query);
+    var foundNames = found.reduce(function (acc, o) {
+      return acc.concat.apply(acc, _toConsumableArray(o.payload));
     }, []);
-    var hasNoResult = !query || query.length === 0 && fileNames.length === 0;
-    setFileNames(hasNoResult ? allNames : fileNames);
+    var hasNoResult = !query || query.length === 0 && foundNames.length === 0;
+    setFileNames(hasNoResult ? _undrawLocal.default : foundNames);
   };
 
   return _react.default.createElement(_FileNamesContext.default.Provider, {
