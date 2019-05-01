@@ -22,6 +22,7 @@ main {
 
 .image {
   position: relative;
+  border: 0.1px solid rgba(0, 0, 0, 0.2);
 
   & .overlay {
     display: none;
