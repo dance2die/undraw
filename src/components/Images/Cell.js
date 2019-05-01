@@ -3,6 +3,8 @@ import React, { useContext } from 'react'
 import { getColumnCount } from '../../utils'
 import FileNamesContext from '../FileNamesContext'
 
+const Image = ({ style, src }) => <img style={style} src={src} alt={src} />
+
 const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)
   const columnCount = getColumnCount(width)
@@ -11,11 +13,7 @@ const Cell = width => ({ rowIndex, columnIndex, style }) => {
   return (
     <>
       {fileNames[index] && (
-        <img
-          style={style}
-          src={`../images/svg/${fileNames[index]}`}
-          alt={`${fileNames[index]}`}
-        />
+        <Image style={style} src={`../images/svg/${fileNames[index]}`} />
       )}
     </>
   )

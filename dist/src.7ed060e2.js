@@ -30013,18 +30013,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
+var Image = function Image(_ref) {
+  var style = _ref.style,
+      src = _ref.src;
+  return _react.default.createElement("img", {
+    style: style,
+    src: src,
+    alt: src
+  });
+};
+
 var Cell = function Cell(width) {
-  return function (_ref) {
-    var rowIndex = _ref.rowIndex,
-        columnIndex = _ref.columnIndex,
-        style = _ref.style;
+  return function (_ref2) {
+    var rowIndex = _ref2.rowIndex,
+        columnIndex = _ref2.columnIndex,
+        style = _ref2.style;
     var fileNames = (0, _react.useContext)(_FileNamesContext.default);
     var columnCount = (0, _utils.getColumnCount)(width);
     var index = columnCount * rowIndex + columnIndex;
-    return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement("img", {
+    return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement(Image, {
       style: style,
-      src: "../images/svg/".concat(fileNames[index]),
-      alt: "".concat(fileNames[index])
+      src: "../images/svg/".concat(fileNames[index])
     }));
   };
 };
@@ -30291,7 +30300,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41369" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33205" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
