@@ -4,23 +4,7 @@ html,
 body,
 #root {
   height: 100vh;
-  /* overflow-x: auto; */
 }
-
-// .Grid {
-//   /* border: 1px solid #d9dddd; */
-// }
-
-// .GridItemEven,
-// .GridItemOdd {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-// .GridItemEven {
-//   background-color: #f8f8f0;
-// }
 
 h1 {
   font-size: 3rem;
@@ -34,6 +18,30 @@ h2 {
 
 main {
   height: 75vh;
+}
+
+.image {
+  position: relative;
+  border: 0.1px solid rgba(0, 0, 0, 0.2);
+
+  & .overlay {
+    display: none;
+
+    &.hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+
+      position: absolute;
+
+      bottom: 0;
+      height: 50%;
+      padding: 0 2rem 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+  }
 }
 
 .no-result {

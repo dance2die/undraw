@@ -12,24 +12,27 @@ import './index.scss'
 
 const log = console.log
 
+const normalizedNames = normalize(localNames)
+
 function App() {
-  const allNames = localNames.map(o => o.image)
-  const normalizedNames = normalize(localNames)
   const trie = useTrie(normalizedNames, false, o => o.type)
-  const [fileNames, setFileNames] = useState(allNames)
+  const [fileNames, setFileNames] = useState(localNames)
 
   const filterByQuery = e => {
     e.preventDefault()
     const { value: query } = e.target
-    if (!query) return
+    if (!query) {
+      setFileNames(localNames)
+      return
+    }
 
-    const searchResult = trie.search(query)
-    const fileNames = searchResult.reduce((acc, o) => {
-      return acc.concat(...o.payload.map(name => name.image))
+    const found = trie.search(query)
+    const foundNames = found.reduce((acc, o) => {
+      return acc.concat(...o.payload)
     }, [])
 
-    const hasNoResult = !query || (query.length === 0 && fileNames.length === 0)
-    setFileNames(hasNoResult ? allNames : fileNames)
+    const hasNoResult = query.length === 0 && foundNames.length === 0
+    setFileNames(hasNoResult ? localNames : foundNames)
   }
 
   return (

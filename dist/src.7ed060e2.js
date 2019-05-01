@@ -25827,7 +25827,8 @@ function normalize(localNames) {
       }).map(function (o) {
         return {
           image: o.image,
-          title: o.title
+          title: o.title,
+          tags: o.tags
         };
       }))
     };
@@ -30013,18 +30014,58 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Image = function Image(_ref) {
+  var style = _ref.style,
+      _ref$file = _ref.file,
+      image = _ref$file.image,
+      tags = _ref$file.tags,
+      title = _ref$file.title;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      hover = _useState2[0],
+      setHover = _useState2[1];
+
+  return _react.default.createElement("section", {
+    className: "image",
+    style: style,
+    onMouseEnter: function onMouseEnter() {
+      return setHover(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setHover(false);
+    }
+  }, _react.default.createElement("img", {
+    style: {
+      width: '100%',
+      height: '100%'
+    },
+    src: "../images/svg/".concat(image),
+    alt: title
+  }), _react.default.createElement("div", {
+    className: "overlay".concat(hover ? ' hover' : '')
+  }, tags));
+};
+
 var Cell = function Cell(width) {
-  return function (_ref) {
-    var rowIndex = _ref.rowIndex,
-        columnIndex = _ref.columnIndex,
-        style = _ref.style;
+  return function (_ref2) {
+    var rowIndex = _ref2.rowIndex,
+        columnIndex = _ref2.columnIndex,
+        style = _ref2.style;
     var fileNames = (0, _react.useContext)(_FileNamesContext.default);
     var columnCount = (0, _utils.getColumnCount)(width);
     var index = columnCount * rowIndex + columnIndex;
-    return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement("img", {
+    return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement(Image, {
       style: style,
-      src: "../images/svg/".concat(fileNames[index]),
-      alt: "".concat(fileNames[index])
+      file: fileNames[index]
     }));
   };
 };
@@ -30089,8 +30130,8 @@ var Images = function Images() {
       width: width,
       columnCount: (0, _utils.getColumnCount)(width),
       rowCount: fileNames.length / (0, _utils.getColumnCount)(width),
-      columnWidth: (0, _utils.getWidth)(width),
-      rowHeight: (0, _utils.getHeight)(width)
+      columnWidth: (0, _utils.getWidth)(width) - 10,
+      rowHeight: (0, _utils.getHeight)(width) - 10
     }, (0, _Cell.default)(width));
   }), !hasFiles && _react.default.createElement(_NoResult.default, null));
 };
@@ -30225,18 +30266,14 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var log = console.log;
+var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
 
 function App() {
-  var allNames = _undrawLocal.default.map(function (o) {
-    return o.image;
-  });
-
-  var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
   var trie = (0, _usetrie.default)(normalizedNames, false, function (o) {
     return o.type;
   });
 
-  var _useState = (0, _react.useState)(allNames),
+  var _useState = (0, _react.useState)(_undrawLocal.default),
       _useState2 = _slicedToArray(_useState, 2),
       fileNames = _useState2[0],
       setFileNames = _useState2[1];
@@ -30244,15 +30281,18 @@ function App() {
   var filterByQuery = function filterByQuery(e) {
     e.preventDefault();
     var query = e.target.value;
-    if (!query) return;
-    var searchResult = trie.search(query);
-    var fileNames = searchResult.reduce(function (acc, o) {
-      return acc.concat.apply(acc, _toConsumableArray(o.payload.map(function (name) {
-        return name.image;
-      })));
+
+    if (!query) {
+      setFileNames(_undrawLocal.default);
+      return;
+    }
+
+    var found = trie.search(query);
+    var foundNames = found.reduce(function (acc, o) {
+      return acc.concat.apply(acc, _toConsumableArray(o.payload));
     }, []);
-    var hasNoResult = !query || query.length === 0 && fileNames.length === 0;
-    setFileNames(hasNoResult ? allNames : fileNames);
+    var hasNoResult = query.length === 0 && foundNames.length === 0;
+    setFileNames(hasNoResult ? _undrawLocal.default : foundNames);
   };
 
   return _react.default.createElement(_FileNamesContext.default.Provider, {
