@@ -30267,7 +30267,7 @@ function App() {
     var foundNames = found.reduce(function (acc, o) {
       return acc.concat.apply(acc, _toConsumableArray(o.payload));
     }, []);
-    var hasNoResult = !query || query.length === 0 && foundNames.length === 0;
+    var hasNoResult = query.length === 0 && foundNames.length === 0;
     setFileNames(hasNoResult ? _undrawLocal.default : foundNames);
   };
 

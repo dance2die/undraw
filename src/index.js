@@ -31,8 +31,7 @@ function App() {
       return acc.concat(...o.payload)
     }, [])
 
-    const hasNoResult =
-      !query || (query.length === 0 && foundNames.length === 0)
+    const hasNoResult = query.length === 0 && foundNames.length === 0
     setFileNames(hasNoResult ? localNames : foundNames)
   }
 
