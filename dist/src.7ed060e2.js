@@ -30242,9 +30242,9 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var log = console.log;
+var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
 
 function App() {
-  var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
   var trie = (0, _usetrie.default)(normalizedNames, false, function (o) {
     return o.type;
   });

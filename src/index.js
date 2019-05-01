@@ -12,8 +12,9 @@ import './index.scss'
 
 const log = console.log
 
+const normalizedNames = normalize(localNames)
+
 function App() {
-  const normalizedNames = normalize(localNames)
   const trie = useTrie(normalizedNames, false, o => o.type)
   const [fileNames, setFileNames] = useState(localNames)
 
