@@ -24,4 +24,45 @@ const getWidth = width =>
   Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
 const getHeight = width => imageHeight
 
-export { debounce, getColumnCount, getWidth, getHeight }
+// Normalize undraw JSON files
+// Demo: https://repl.it/@dance2die/Normalizr-for-undraw-data
+function normalize(localNames) {
+  const tags = [
+    ...new Set(
+      localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
+    ),
+  ]
+  return tags.map(tag => {
+    return {
+      type: tag,
+      payload: [
+        ...localNames
+          .filter(o => o.tags.includes(tag))
+          .map(o => ({
+            image: o.image,
+            title: o.title,
+          })),
+      ],
+    }
+  })
+}
+
+// function normalize(localNames) {
+//   const tags = [
+//     ...new Set(
+//       localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
+//     ),
+//   ]
+
+//   return tags.reduce((acc, tag) => {
+//     acc[tag] = localNames
+//       .filter(o => o.tags.includes(tag))
+//       .reduce((acc2, o) => {
+//         acc2[o.image] = o.title
+//         return acc2
+//       }, {})
+//     return acc
+//   }, {})
+// }
+
+export { debounce, normalize, getColumnCount, getWidth, getHeight }

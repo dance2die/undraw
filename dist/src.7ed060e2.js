@@ -28207,7 +28207,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.debounce = debounce;
+exports.normalize = normalize;
 exports.getHeight = exports.getWidth = exports.getColumnCount = void 0;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
 function debounce(fn, ms) {
@@ -28249,9 +28258,46 @@ exports.getWidth = getWidth;
 
 var getHeight = function getHeight(width) {
   return imageHeight;
-};
+}; // Normalize undraw JSON files
+// Demo: https://repl.it/@dance2die/Normalizr-for-undraw-data
+
 
 exports.getHeight = getHeight;
+
+function normalize(localNames) {
+  var tags = _toConsumableArray(new Set(localNames.reduce(function (acc, name) {
+    return acc.concat(name.tags.split(', '));
+  }, [])));
+
+  return tags.map(function (tag) {
+    return {
+      type: tag,
+      payload: _toConsumableArray(localNames.filter(function (o) {
+        return o.tags.includes(tag);
+      }).map(function (o) {
+        return {
+          image: o.image,
+          title: o.title
+        };
+      }))
+    };
+  });
+} // function normalize(localNames) {
+//   const tags = [
+//     ...new Set(
+//       localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
+//     ),
+//   ]
+//   return tags.reduce((acc, tag) => {
+//     acc[tag] = localNames
+//       .filter(o => o.tags.includes(tag))
+//       .reduce((acc2, o) => {
+//         acc2[o.image] = o.title
+//         return acc2
+//       }, {})
+//     return acc
+//   }, {})
+// }
 },{}],"../src/data/undraw-local.json":[function(require,module,exports) {
 module.exports = [{
   "image": "making_art_759c.svg",
@@ -30017,6 +30063,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -30026,7 +30080,6 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var log = console.log;
-log("localNames", _undrawLocal.default);
 var FileNamesContext = (0, _react.createContext)();
 
 var Cell = function Cell(width) {
@@ -30035,8 +30088,7 @@ var Cell = function Cell(width) {
         columnIndex = _ref.columnIndex,
         style = _ref.style;
     var fileNames = (0, _react.useContext)(FileNamesContext);
-    var columnCount = (0, _utils.getColumnCount)(width); // log(`cell columnCount=${columnCount}`)
-
+    var columnCount = (0, _utils.getColumnCount)(width);
     var index = columnCount * rowIndex + columnIndex;
     return _react.default.createElement(_react.default.Fragment, null, fileNames[index] && _react.default.createElement("img", {
       style: style,
@@ -30079,13 +30131,16 @@ function Search(_ref3) {
 }
 
 function App() {
-  var names = _undrawLocal.default.map(function (o) {
+  var allNames = _undrawLocal.default.map(function (o) {
     return o.image;
   });
 
-  var trie = (0, _usetrie.default)(names);
+  var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
+  var trie = (0, _usetrie.default)(normalizedNames, false, function (o) {
+    return o.type;
+  });
 
-  var _useState = (0, _react.useState)(names),
+  var _useState = (0, _react.useState)(allNames),
       _useState2 = _slicedToArray(_useState, 2),
       fileNames = _useState2[0],
       setFileNames = _useState2[1];
@@ -30093,9 +30148,15 @@ function App() {
   var filterByQuery = function filterByQuery(e) {
     var query = e.target.value;
     e.preventDefault();
-    var words = trie.search(query);
-    var hasNoResult = !query || query.length === 0 && words.length === 0;
-    setFileNames(hasNoResult ? names : words);
+    var searchResult = trie.search(query);
+    var fileNames = searchResult.reduce(function (acc, o) {
+      return acc.concat.apply(acc, _toConsumableArray(o.payload.map(function (name) {
+        return name.image;
+      })));
+    }, []); // log(`fileNames`, searchResult)
+
+    var hasNoResult = !query || query.length === 0 && fileNames.length === 0;
+    setFileNames(hasNoResult ? allNames : fileNames);
   };
 
   return _react.default.createElement(FileNamesContext.Provider, {

@@ -1,26 +1,22 @@
 import React, { useState, createContext, useContext } from 'react'
 import { render } from 'react-dom'
-import { FixedSizeGrid as Grid, FixedSizeList as List } from 'react-window'
+import { FixedSizeGrid as Grid, FixedSizeList } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import useTrie from '@cshooks/usetrie'
 
 // import localNames from './localNames'
-import { getColumnCount, getWidth, getHeight } from './utils'
+import { getColumnCount, getWidth, getHeight, normalize } from './utils'
 import localNames from './data/undraw-local.json'
 
 import './index.scss'
 
 const log = console.log
 
-log(`localNames`, localNames)
-
 const FileNamesContext = createContext()
 
 const Cell = width => ({ rowIndex, columnIndex, style }) => {
   const fileNames = useContext(FileNamesContext)
-
   const columnCount = getColumnCount(width)
-  // log(`cell columnCount=${columnCount}`)
   const index = columnCount * rowIndex + columnIndex
 
   return (
@@ -70,17 +66,23 @@ function Search({ filterByQuery }) {
 }
 
 function App() {
-  const names = localNames.map(o => o.image)
-  const trie = useTrie(names)
-  const [fileNames, setFileNames] = useState(names)
+  const allNames = localNames.map(o => o.image)
+  const normalizedNames = normalize(localNames)
+  const trie = useTrie(normalizedNames, false, o => o.type)
+  const [fileNames, setFileNames] = useState(allNames)
 
   const filterByQuery = e => {
     const { value: query } = e.target
     e.preventDefault()
 
-    const words = trie.search(query)
-    const hasNoResult = !query || (query.length === 0 && words.length === 0)
-    setFileNames(hasNoResult ? names : words)
+    const searchResult = trie.search(query)
+    const fileNames = searchResult.reduce((acc, o) => {
+      return acc.concat(...o.payload.map(name => name.image))
+    }, [])
+
+    // log(`fileNames`, searchResult)
+    const hasNoResult = !query || (query.length === 0 && fileNames.length === 0)
+    setFileNames(hasNoResult ? allNames : fileNames)
   }
 
   return (
