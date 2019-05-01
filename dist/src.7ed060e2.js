@@ -28282,22 +28282,7 @@ function normalize(localNames) {
       }))
     };
   });
-} // function normalize(localNames) {
-//   const tags = [
-//     ...new Set(
-//       localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
-//     ),
-//   ]
-//   return tags.reduce((acc, tag) => {
-//     acc[tag] = localNames
-//       .filter(o => o.tags.includes(tag))
-//       .reduce((acc2, o) => {
-//         acc2[o.image] = o.title
-//         return acc2
-//       }, {})
-//     return acc
-//   }, {})
-// }
+}
 },{}],"../src/data/undraw-local.json":[function(require,module,exports) {
 module.exports = [{
   "image": "making_art_759c.svg",
