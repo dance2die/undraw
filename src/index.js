@@ -19,15 +19,15 @@ function App() {
   const [fileNames, setFileNames] = useState(allNames)
 
   const filterByQuery = e => {
-    const { value: query } = e.target
     e.preventDefault()
+    const { value: query } = e.target
+    if (!query) return
 
     const searchResult = trie.search(query)
     const fileNames = searchResult.reduce((acc, o) => {
       return acc.concat(...o.payload.map(name => name.image))
     }, [])
 
-    // log(`fileNames`, searchResult)
     const hasNoResult = !query || (query.length === 0 && fileNames.length === 0)
     setFileNames(hasNoResult ? allNames : fileNames)
   }

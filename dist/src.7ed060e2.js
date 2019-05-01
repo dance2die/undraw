@@ -30219,15 +30219,15 @@ function App() {
       setFileNames = _useState2[1];
 
   var filterByQuery = function filterByQuery(e) {
-    var query = e.target.value;
     e.preventDefault();
+    var query = e.target.value;
+    if (!query) return;
     var searchResult = trie.search(query);
     var fileNames = searchResult.reduce(function (acc, o) {
       return acc.concat.apply(acc, _toConsumableArray(o.payload.map(function (name) {
         return name.image;
       })));
-    }, []); // log(`fileNames`, searchResult)
-
+    }, []);
     var hasNoResult = !query || query.length === 0 && fileNames.length === 0;
     setFileNames(hasNoResult ? allNames : fileNames);
   };
