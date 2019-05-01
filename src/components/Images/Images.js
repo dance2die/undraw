@@ -3,28 +3,36 @@ import { FixedSizeGrid as Grid } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 
 import { getColumnCount, getWidth, getHeight } from '../../utils'
-import Cell from './Cell'
 import FileNamesContext from '../FileNamesContext'
+import Cell from './Cell'
+import NoResult from './NoResult'
 
 const Images = () => {
   const fileNames = useContext(FileNamesContext)
+  const hasFiles = fileNames.length > 0
 
   return (
-    <AutoSizer>
-      {({ width, height }) => (
-        <Grid
-          className='Grid'
-          height={height}
-          width={width}
-          columnCount={getColumnCount(width)}
-          rowCount={fileNames.length / getColumnCount(width)}
-          columnWidth={getWidth(width)}
-          rowHeight={getHeight(width)}
-        >
-          {Cell(width)}
-        </Grid>
+    <>
+      {hasFiles && (
+        <AutoSizer>
+          {({ width, height }) => (
+            <Grid
+              className='Grid'
+              height={height}
+              width={width}
+              columnCount={getColumnCount(width)}
+              rowCount={fileNames.length / getColumnCount(width)}
+              columnWidth={getWidth(width)}
+              rowHeight={getHeight(width)}
+            >
+              {Cell(width)}
+            </Grid>
+          )}
+        </AutoSizer>
       )}
-    </AutoSizer>
+
+      {!hasFiles && <NoResult />}
+    </>
   )
 }
 

@@ -30031,7 +30031,27 @@ var Cell = function Cell(width) {
 
 var _default = Cell;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../utils":"../src/utils/index.js","../FileNamesContext":"../src/components/FileNamesContext.js"}],"../src/components/Images/Images.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../utils":"../src/utils/index.js","../FileNamesContext":"../src/components/FileNamesContext.js"}],"../src/components/Images/NoResult.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NoResult = function NoResult() {
+  return _react.default.createElement("h2", {
+    className: "no-result"
+  }, "Nothing to see here...");
+};
+
+var _default = NoResult;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../src/components/Images/Images.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30047,9 +30067,11 @@ var _reactVirtualizedAutoSizer = _interopRequireDefault(require("react-virtualiz
 
 var _utils = require("../../utils");
 
+var _FileNamesContext = _interopRequireDefault(require("../FileNamesContext"));
+
 var _Cell = _interopRequireDefault(require("./Cell"));
 
-var _FileNamesContext = _interopRequireDefault(require("../FileNamesContext"));
+var _NoResult = _interopRequireDefault(require("./NoResult"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30057,7 +30079,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Images = function Images() {
   var fileNames = (0, _react.useContext)(_FileNamesContext.default);
-  return _react.default.createElement(_reactVirtualizedAutoSizer.default, null, function (_ref) {
+  var hasFiles = fileNames.length > 0;
+  return _react.default.createElement(_react.default.Fragment, null, hasFiles && _react.default.createElement(_reactVirtualizedAutoSizer.default, null, function (_ref) {
     var width = _ref.width,
         height = _ref.height;
     return _react.default.createElement(_reactWindow.FixedSizeGrid, {
@@ -30069,12 +30092,12 @@ var Images = function Images() {
       columnWidth: (0, _utils.getWidth)(width),
       rowHeight: (0, _utils.getHeight)(width)
     }, (0, _Cell.default)(width));
-  });
+  }), !hasFiles && _react.default.createElement(_NoResult.default, null));
 };
 
 var _default = Images;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-window":"../node_modules/react-window/dist/index.esm.js","react-virtualized-auto-sizer":"../node_modules/react-virtualized-auto-sizer/dist/index.esm.js","../../utils":"../src/utils/index.js","./Cell":"../src/components/Images/Cell.js","../FileNamesContext":"../src/components/FileNamesContext.js"}],"../src/components/Images/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-window":"../node_modules/react-window/dist/index.esm.js","react-virtualized-auto-sizer":"../node_modules/react-virtualized-auto-sizer/dist/index.esm.js","../../utils":"../src/utils/index.js","../FileNamesContext":"../src/components/FileNamesContext.js","./Cell":"../src/components/Images/Cell.js","./NoResult":"../src/components/Images/NoResult.js"}],"../src/components/Images/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

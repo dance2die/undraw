@@ -27,6 +27,22 @@ h1 {
   font-weight: 700;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+main {
+  height: 75vh;
+}
+
+.no-result {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 3rem;
+}
+
 .search {
   background-color: antiquewhite;
   height: 25vh;
@@ -50,8 +66,4 @@ h1 {
   &.title {
     font-size: 3rem;
   }
-}
-
-main {
-  height: 75vh;
 }
