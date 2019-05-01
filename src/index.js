@@ -13,7 +13,6 @@ import './index.scss'
 const log = console.log
 
 function App() {
-  const allNames = localNames.map(o => o.image)
   const normalizedNames = normalize(localNames)
   const trie = useTrie(normalizedNames, false, o => o.type)
   const [fileNames, setFileNames] = useState(localNames)

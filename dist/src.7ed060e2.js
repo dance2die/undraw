@@ -30244,10 +30244,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var log = console.log;
 
 function App() {
-  var allNames = _undrawLocal.default.map(function (o) {
-    return o.image;
-  });
-
   var normalizedNames = (0, _utils.normalize)(_undrawLocal.default);
   var trie = (0, _usetrie.default)(normalizedNames, false, function (o) {
     return o.type;
