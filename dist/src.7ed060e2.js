@@ -30257,7 +30257,12 @@ function App() {
   var filterByQuery = function filterByQuery(e) {
     e.preventDefault();
     var query = e.target.value;
-    if (!query) return;
+
+    if (!query) {
+      setFileNames(_undrawLocal.default);
+      return;
+    }
+
     var found = trie.search(query);
     var foundNames = found.reduce(function (acc, o) {
       return acc.concat.apply(acc, _toConsumableArray(o.payload));

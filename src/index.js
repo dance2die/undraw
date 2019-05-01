@@ -21,7 +21,10 @@ function App() {
   const filterByQuery = e => {
     e.preventDefault()
     const { value: query } = e.target
-    if (!query) return
+    if (!query) {
+      setFileNames(localNames)
+      return
+    }
 
     const found = trie.search(query)
     const foundNames = found.reduce((acc, o) => {
