@@ -13,17 +13,20 @@ const Image = ({ style, file: { image, tags, title } }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <img
-        style={{ width: '100%', height: '100%' }}
-        src={`../images/svg/${image}`}
-        alt={title}
-      />
-      <div
-        style={{ width: style.width }}
-        className={`overlay${hover ? ' hover' : ''}`}
-      >
-        <span className='tags'>{tags}</span>
-      </div>
+      <article>
+        <img
+          style={{ width: '100%', height: '80%' }}
+          src={`../images/svg/${image}`}
+          alt={title}
+        />
+        <div
+          style={{ width: style.width }}
+          className={`overlay${hover ? ' hover' : ''}`}
+        >
+          <span className='tags'>{tags}</span>
+        </div>
+      </article>
+      <h4 className='title'>{title}</h4>
     </section>
   )
 }

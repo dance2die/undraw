@@ -24,6 +24,12 @@ main {
   position: relative;
   border: 0.1px solid rgba(0, 0, 0, 0.2);
 
+  & .title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 12px;
+  }
+
   & .overlay {
     display: none;
     position: relative;
