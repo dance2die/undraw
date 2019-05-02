@@ -26,6 +26,12 @@ main {
 
   & .overlay {
     display: none;
+    position: relative;
+
+    & .tags {
+      position: absolute;
+      padding: 0 2rem 0;
+    }
 
     &.hover {
       display: flex;

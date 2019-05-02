@@ -18,7 +18,12 @@ const Image = ({ style, file: { image, tags, title } }) => {
         src={`../images/svg/${image}`}
         alt={title}
       />
-      <div className={`overlay${hover ? ' hover' : ''}`}>{tags}</div>
+      <div
+        style={{ width: style.width }}
+        className={`overlay${hover ? ' hover' : ''}`}
+      >
+        <span className='tags'>{tags}</span>
+      </div>
     </section>
   )
 }
