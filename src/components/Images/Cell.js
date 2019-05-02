@@ -15,7 +15,7 @@ const Image = ({ style, file: { image, tags, title } }) => {
     >
       <article>
         <img
-          style={{ width: '100%', height: '80%' }}
+          style={{ width: '100%', height: '60%' }}
           src={`../images/svg/${image}`}
           alt={title}
         />
