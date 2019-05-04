@@ -8,7 +8,7 @@ import FileNamesContext from './components/FileNamesContext'
 import Search from './components/Search'
 import Images from './components/Images'
 
-import './index.scss'
+// import './index.scss'
 
 const log = console.log
 

@@ -1,11 +1,23 @@
-const staticCacheName = 'staticfiles'
+// "version" should follow the "package.json" version
+const version = 'v0.0.3'
+const staticCacheName = `staticfiles-${version}`
 const log = console.log
 
 addEventListener('install', function(installEvent) {
+  skipWaiting()
+
   installEvent.waitUntil(
     caches
       .open(staticCacheName)
-      .then(staticCache => {})
+      .then(staticCache => {
+        // nice to haves..
+
+        // must haves...
+        const allCSS = [
+          ...document.querySelectorAll('link[rel="stylesheet"][href$="css"]'),
+        ].map(css => css.href.replace(css.baseURI, ''))
+        return staticCache.addAll(allCSS)
+      })
       .catch(error => log(`Error retrieving ${staticCacheName}`))
   )
 })
@@ -18,15 +30,6 @@ addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
   //   log(request)
   fetchEvent.respondWith(
-    fetch(request)
-      .then(responseFromFetch => responseFromFetch)
-      .catch(
-        error =>
-          new Response('<h1>Oops</h1><p>something went wrong</p>', {
-            headers: {
-              'Content-type': 'text/html;charset=utf-8',
-            },
-          })
-      )
+    caches.match(request).then(cacheResponse => cacheResponse || fetch(request))
   )
 })
