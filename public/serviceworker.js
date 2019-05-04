@@ -1,5 +1,5 @@
 // "version" should follow the "package.json" version
-const version = 'v0.0.3'
+const version = 'v0.0.4'
 const staticCacheName = `staticfiles-${version}`
 const log = console.log
 
@@ -22,8 +22,19 @@ addEventListener('install', function(installEvent) {
   )
 })
 
-addEventListener('activate', function(event) {
-  log(`Service worker is ACTIVATing...`, event)
+addEventListener('activate', function(activateEvent) {
+  activateEvent.waitUntil(
+    caches
+      .keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== staticCacheName) return caches.delete(cacheName)
+          })
+        )
+      })
+      .then(() => clients.claim())
+  )
 })
 
 addEventListener('fetch', function(fetchEvent) {
