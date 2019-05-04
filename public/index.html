@@ -1,16 +1,35 @@
 <html>
-  <head>
-    <title>Search Undraw.io Illustrations</title>
 
-    <link rel="serviceworker" href="/serviceworker.js" />
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript
-    </noscript>
-    <div id="root" />
-    
-    <script src="../src/index.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-  </body>
+<head>
+  <title>Search Undraw.io Illustrations</title>
+
+  <link rel="serviceworker" href="/serviceworker.js" />
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript
+  </noscript>
+  <div id="root" />
+
+  <script src="../src/index.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+
+  <script src="/serviceworker-registration.js"></script>
+
+  <script>
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker
+        .register('/serviceworker.js')
+        .then(function (registration) {
+          console.log('success!', registration.scope)
+        })
+        .catch(function (error) {
+          console.log('failure!!!!!', error)
+        })
+      console.log('all done')
+    }
+  </script>
+</body>
+
 </html>
