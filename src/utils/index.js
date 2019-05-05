@@ -70,4 +70,24 @@ function normalize(localNames) {
   return [...tagObjects, ...titleObjects]
 }
 
-export { debounce, normalize, getColumnCount, getWidth, getHeight }
+/**
+ *
+ * @param {Array} foundNames - an array of `{image: string, type: string, tags: string}`
+ */
+function filterUniqueNames(foundNames) {
+  return Object.values(
+    foundNames.reduce((acc, o) => {
+      if (!acc[o.title]) acc[o.title] = o
+      return acc
+    }, new Map())
+  )
+}
+
+export {
+  debounce,
+  normalize,
+  getColumnCount,
+  getWidth,
+  getHeight,
+  filterUniqueNames,
+}

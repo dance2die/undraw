@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { render } from 'react-dom'
 import useTrie from '@cshooks/usetrie'
 
-import { normalize } from './utils'
+import { normalize, filterUniqueNames } from './utils'
 import localNames from './data/undraw-local.json'
 import FileNamesContext from './components/FileNamesContext'
 import Search from './components/Search'
@@ -14,11 +14,8 @@ const log = console.log
 
 const normalizedNames = normalize(localNames)
 
-log(`normalizedNames`, normalizedNames)
-
 function App() {
   const trie = useTrie(normalizedNames, false, o => o.type)
-  log(`trie`, trie)
   const [fileNames, setFileNames] = useState(localNames)
 
   const filterByQuery = e => {
@@ -34,8 +31,10 @@ function App() {
       return acc.concat(...o.payload)
     }, [])
 
-    const hasNoResult = query.length === 0 && foundNames.length === 0
-    setFileNames(hasNoResult ? localNames : foundNames)
+    const uniqueNames = filterUniqueNames(foundNames)
+
+    const hasNoResult = query.length === 0 && uniqueNames.length === 0
+    setFileNames(hasNoResult ? localNames : uniqueNames)
   }
 
   return (
