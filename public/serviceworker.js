@@ -1,5 +1,4 @@
-// "version" should follow the "package.json" version
-const version = 'v0.0.4'
+const version = 'v0.0.6'
 const staticCacheName = `staticfiles-${version}`
 const log = console.log
 
@@ -13,10 +12,13 @@ addEventListener('install', function(installEvent) {
         // nice to haves..
 
         // must haves...
-        const allCSS = [
-          ...document.querySelectorAll('link[rel="stylesheet"][href$="css"]'),
-        ].map(css => css.href.replace(css.baseURI, ''))
-        return staticCache.addAll(allCSS)
+        const favicons = [
+          `/images/icons/apple-touch-icon.png`,
+          `/images/icons/favicon-32x32.png`,
+          `/images/icons/favicon-16x16.png`,
+          `/images/icons/site.webmanifest`,
+        ]
+        return staticCache.addAll(favicons)
       })
       .catch(error => log(`Error retrieving ${staticCacheName}`))
   )
