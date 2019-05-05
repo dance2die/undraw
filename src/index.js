@@ -14,8 +14,11 @@ const log = console.log
 
 const normalizedNames = normalize(localNames)
 
+log(`normalizedNames`, normalizedNames)
+
 function App() {
   const trie = useTrie(normalizedNames, false, o => o.type)
+  log(`trie`, trie)
   const [fileNames, setFileNames] = useState(localNames)
 
   const filterByQuery = e => {

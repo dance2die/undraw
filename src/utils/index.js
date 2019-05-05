@@ -33,9 +33,13 @@ function normalize(localNames) {
     ),
   ]
 
-  return tags.map(tag => {
+  const titles = [
+    ...new Set(localNames.reduce((acc, name) => acc.concat(name.title), [])),
+  ]
+
+  const tagObjects = tags.map(tag => {
     return {
-      type: tag,
+      type: tag.toLowerCase(),
       payload: [
         ...localNames
           .filter(o => o.tags.includes(tag))
@@ -47,6 +51,23 @@ function normalize(localNames) {
       ],
     }
   })
+
+  const titleObjects = titles.map(title => {
+    return {
+      type: title.toLowerCase(),
+      payload: [
+        ...localNames
+          .filter(o => o.title === title)
+          .map(o => ({
+            image: o.image,
+            title: o.title,
+            tags: o.tags,
+          })),
+      ],
+    }
+  })
+
+  return [...tagObjects, ...titleObjects]
 }
 
 export { debounce, normalize, getColumnCount, getWidth, getHeight }
