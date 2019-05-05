@@ -1,4 +1,4 @@
-const version = 'v0.0.8'
+const version = 'v0.0.11'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const cacheList = [staticCacheName, imageCacheName]
@@ -38,7 +38,6 @@ addEventListener('activate', function(activateEvent) {
       .then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
-            // if (cacheName !== staticCacheName) return caches.delete(cacheName)
             if (!cacheList.includes(cacheName)) return caches.delete(cacheName)
           })
         )
