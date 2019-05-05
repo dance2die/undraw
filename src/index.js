@@ -26,7 +26,7 @@ function App() {
       return
     }
 
-    const found = trie.search(query)
+    const found = trie.search(query.toLowerCase())
     const foundNames = found.reduce((acc, o) => {
       return acc.concat(...o.payload)
     }, [])
