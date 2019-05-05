@@ -1,21 +1,21 @@
-// https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
-function debounce(fn, ms, leading = true) {
-  let timeout
+// // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
+// function debounce(fn, ms, leading = true) {
+//   let timeout
 
-  return function run() {
-    const now = leading && !timeout
-    clearTimeout(timeout)
+//   return function run() {
+//     const now = leading && !timeout
+//     clearTimeout(timeout)
 
-    const execute = () => fn.apply(this, arguments)
+//     const execute = () => fn.apply(this, arguments)
 
-    timeout = setTimeout(() => {
-      timeout = null
-      !leading && execute()
-    }, ms)
+//     timeout = setTimeout(() => {
+//       timeout = null
+//       !leading && execute()
+//     }, ms)
 
-    now && execute()
-  }
-}
+//     now && execute()
+//   }
+// }
 
 const imageWidth = 375
 const imageHeight = 280
@@ -24,20 +24,14 @@ const getWidth = width =>
   Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
 const getHeight = width => imageHeight
 
-// Normalize undraw JSON files
-// Demo: https://repl.it/@dance2die/Normalizr-for-undraw-data
-function normalize(localNames) {
+function buildTagObjects(localNames) {
   const tags = [
     ...new Set(
       localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
     ),
   ]
 
-  const titles = [
-    ...new Set(localNames.reduce((acc, name) => acc.concat(name.title), [])),
-  ]
-
-  const tagObjects = tags.map(tag => {
+  return tags.map(tag => {
     return {
       type: tag.toLowerCase(),
       payload: [
@@ -51,8 +45,14 @@ function normalize(localNames) {
       ],
     }
   })
+}
 
-  const titleObjects = titles.map(title => {
+function buildTitleObjects(localNames) {
+  const titles = [
+    ...new Set(localNames.reduce((acc, name) => acc.concat(name.title), [])),
+  ]
+
+  return titles.map(title => {
     return {
       type: title.toLowerCase(),
       payload: [
@@ -66,6 +66,13 @@ function normalize(localNames) {
       ],
     }
   })
+}
+
+// Normalize undraw JSON files
+// Demo: https://repl.it/@dance2die/Normalizr-for-undraw-data
+function normalize(localNames) {
+  const tagObjects = buildTagObjects(localNames)
+  const titleObjects = buildTitleObjects(localNames)
 
   return [...tagObjects, ...titleObjects]
 }
@@ -84,7 +91,7 @@ function filterUniqueNames(foundNames) {
 }
 
 export {
-  debounce,
+  // debounce,
   normalize,
   getColumnCount,
   getWidth,
