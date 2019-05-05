@@ -1,4 +1,4 @@
-const version = 'v0.0.6'
+const version = 'v0.0.7'
 const staticCacheName = `staticfiles-${version}`
 const log = console.log
 
@@ -11,14 +11,15 @@ addEventListener('install', function(installEvent) {
       .then(staticCache => {
         // nice to haves..
 
-        // must haves...
         const favicons = [
           `/images/icons/apple-touch-icon.png`,
           `/images/icons/favicon-32x32.png`,
           `/images/icons/favicon-16x16.png`,
           `/images/icons/site.webmanifest`,
         ]
-        return staticCache.addAll(favicons)
+        staticCache.addAll(favicons)
+        // must haves...
+        // staticCache.addAll(favicons)
       })
       .catch(error => log(`Error retrieving ${staticCacheName}`))
   )
