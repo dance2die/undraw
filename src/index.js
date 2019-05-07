@@ -40,9 +40,7 @@ function App() {
   return (
     <FileNamesContext.Provider value={fileNames}>
       <Search filterByQuery={filterByQuery} />
-      <main>
-        <Images />
-      </main>
+      <Images />
     </FileNamesContext.Provider>
   )
 }
