@@ -18,19 +18,34 @@ const Images = () => {
   const handleKeyDown = event => {
     const { keyCode } = event
 
-    const [pageUp, pageDown, arrowUp, arrowDown] = [33, 34, 38, 40]
+    const [pageUp, pageDown, arrowUp, arrowDown, end, home] = [
+      33,
+      34,
+      38,
+      40,
+      35,
+      36,
+    ]
     const pageOffset = gridHeight * 2
     const arrowOffset = gridHeight / 2
+    const maxHeight = +gridRef.current.firstElementChild.style.height.replace(
+      'px',
+      ''
+    )
+
+    const minHeight = 0.1
 
     const keys = {
-      [pageUp]: Math.max(0, scrollOffset - pageOffset),
-      [pageDown]: scrollOffset + pageOffset,
-      [arrowUp]: Math.max(0, scrollOffset - arrowOffset),
-      [arrowDown]: scrollOffset + arrowOffset,
+      [pageUp]: Math.max(minHeight, scrollOffset - pageOffset),
+      [pageDown]: Math.min(scrollOffset + pageOffset, maxHeight),
+      [arrowUp]: Math.max(minHeight, scrollOffset - arrowOffset),
+      [arrowDown]: Math.min(scrollOffset + arrowOffset, maxHeight),
+      [end]: maxHeight,
+      [home]: minHeight,
     }
 
     if (keys[keyCode]) {
-      gridRef.current.scroll({
+      gridRef.current.scrollTo({
         left: 0,
         top: keys[keyCode],
         behavior: 'auto',
