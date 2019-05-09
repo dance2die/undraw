@@ -1,4 +1,4 @@
-const version = 'v0.1.1'
+const version = 'v0.1.6'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const pagesCacheName = `pages`
@@ -55,6 +55,7 @@ addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
 
   if (request.headers.get(`Accept`).includes(`text/html`)) {
+    log(`Accepted text/html`)
     fetchEvent.respondWith(
       fetch(request)
         .then(fetchResponse => {
@@ -68,6 +69,7 @@ addEventListener('fetch', function(fetchEvent) {
           return fetchResponse
         })
         .catch(error => {
+          log(`returning / from cache....`)
           return caches
             .match(request)
             .then(
