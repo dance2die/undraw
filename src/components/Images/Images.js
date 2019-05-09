@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useContext,
-  useState,
-} from 'react'
+import React, { useLayoutEffect, useRef, useContext, useState } from 'react'
 import { FixedSizeGrid as Grid } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 
@@ -17,21 +11,13 @@ const Images = () => {
   const fileNames = useContext(FileNamesContext)
   const [scrollOffset, setScrollOffset] = useState(0)
   const [gridHeight, setGridHeight] = useState(0)
-  // const [scrollUpdateWasRequested, setScrollUpdateWasRequested] = useState(
-  //   false
-  // )
   const gridRef = useRef(undefined)
 
   const hasFiles = fileNames.length > 0
 
-  const [pageUp, pageDown, arrowUp, arrowDown, end, home] = [
-    33,
-    34,
-    38,
-    40,
-    35,
-    36,
-  ]
+  // prettier-ignore
+  const [pageUp, pageDown, arrowUp, arrowDown, end, home] = 
+        [33,     34,       38,      40,        35,  36]
   const pageOffset = gridHeight * 2
   const arrowOffset = gridHeight / 2
   const maxHeight =
@@ -64,8 +50,7 @@ const Images = () => {
   })
 
   const onScroll = ({ scrollTop, scrollUpdateWasRequested }) => {
-    // if (!scrollUpdateWasRequested) setScrollOffset(scrollTop)
-    // setScrollUpdateWasRequested(scrollUpdateWasRequested)
+    scrollUpdateWasRequested && setScrollOffset(scrollTop)
   }
 
   return (
@@ -84,8 +69,8 @@ const Images = () => {
                 width={width}
                 columnCount={getColumnCount(width)}
                 rowCount={fileNames.length / getColumnCount(width)}
-                columnWidth={getWidth(width) - 10}
-                rowHeight={getHeight(width) - 10}
+                columnWidth={getWidth(width)}
+                rowHeight={getHeight(width)}
               >
                 {Cell(width)}
               </Grid>
