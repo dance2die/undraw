@@ -1,4 +1,4 @@
-const version = 'v0.1.7'
+const version = 'v0.1.15'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const pagesCacheName = `pages`
@@ -25,11 +25,7 @@ addEventListener('install', function(installEvent) {
         staticCache.addAll(optionalCaches)
 
         // must haves...
-        const mustCaches = [
-          `bundle.js`,
-          `/offline.html`,
-          `/images/svg/fallback.svg`,
-        ]
+        const mustCaches = [`/offline.html`, `/images/svg/fallback.svg`]
         return staticCache.addAll(mustCaches)
       })
       .catch(error => log(`Error retrieving ${staticCacheName}`))
@@ -53,11 +49,16 @@ addEventListener('activate', function(activateEvent) {
 
 addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
+  const acceptHeader = request.headers.get('Accept')
+  const isScript = request.destination === 'script'
+  // log(
+  //   `contentTypeHeader=${contentTypeHeader}, request.headers.get('Accept')=${request.headers.get(
+  //     'Accept'
+  //   )} request`,
+  //   request
+  // )
 
-  if (
-    request.headers.get(`Accept`).includes(`text/html`) ||
-    request.headers.get(`Accept`).includes(`application/javascript`)
-  ) {
+  if (acceptHeader.includes(`text/html`)) {
     fetchEvent.respondWith(
       fetch(request)
         .then(fetchResponse => {
@@ -78,7 +79,28 @@ addEventListener('fetch', function(fetchEvent) {
             )
         })
     )
-  } else if (request.headers.get(`Accept`).includes(`image`)) {
+  } else if (isScript) {
+    fetchEvent.respondWith(
+      fetch(request)
+        .then(fetchResponse => {
+          const copy = fetchResponse.clone()
+          fetchEvent.waitUntil(
+            caches
+              .open(pagesCacheName)
+              .then(pagesCache => pagesCache.put(request, copy))
+          )
+
+          return fetchResponse
+        })
+        .catch(error => {
+          return caches
+            .match(request)
+            .then(
+              cacheResponse => cacheResponse || caches.match(`/offline.html`)
+            )
+        })
+    )
+  } else if (acceptHeader.includes(`image`)) {
     fetchEvent.respondWith(
       caches.match(request).then(cacheResponse => {
         return (

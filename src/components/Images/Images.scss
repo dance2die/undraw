@@ -17,13 +17,19 @@
     display: none;
     position: relative;
 
+    & a.download {
+      font-size: 3rem;
+      padding: 2rem;
+      color: #ffc107;
+    }
+
     & .tags {
-      position: absolute;
       padding: 0 2rem 0;
     }
 
     &.hover {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-size: 1.5rem;
@@ -32,8 +38,7 @@
       word-spacing: 0.5rem;
       letter-spacing: 0.05rem;
 
-      height: 50%;
-      width: 100%;
+      height: 100%;
 
       position: absolute;
       text-align: center;
