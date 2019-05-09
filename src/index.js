@@ -16,9 +16,7 @@ function App() {
   const trie = useTrie(normalizedNames, false, o => o.type)
   const [fileNames, setFileNames] = useState(localNames)
 
-  const filterByQuery = e => {
-    e.preventDefault()
-    const { value: query } = e.target
+  const filterByQuery = query => {
     if (!query) {
       setFileNames(localNames)
       return
