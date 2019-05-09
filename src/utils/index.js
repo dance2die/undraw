@@ -1,6 +1,5 @@
 import normalize from './normalize'
 import filterUniqueNames from './filterUniqueNames'
-import SuspenseFallback from './SuspenseFallback'
 
 // // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
 // function debounce(fn, ms, leading = true) {
@@ -28,11 +27,4 @@ const getWidth = width =>
   Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
 const getHeight = width => imageHeight
 
-export {
-  normalize,
-  getColumnCount,
-  getWidth,
-  getHeight,
-  filterUniqueNames,
-  SuspenseFallback,
-}
+export { normalize, getColumnCount, getWidth, getHeight, filterUniqueNames }

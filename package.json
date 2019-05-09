@@ -32,9 +32,9 @@
     "@cshooks/usetrie": "^1.0.8",
     "react": "^16",
     "react-dom": "^16",
+    "react-hot-loader": "^4.8.4",
     "react-virtualized-auto-sizer": "1.0.2",
-    "react-window": "^1",
-    "react-hot-loader": "^4.8.4"
+    "react-window": "^1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
