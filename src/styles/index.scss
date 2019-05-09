@@ -21,6 +21,15 @@ h2 {
   height: 75vh;
 }
 
+.suspense-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  font-size: 3rem;
+}
+
 .image {
   position: relative;
   border: 0.1px solid rgba(0, 0, 0, 0.2);

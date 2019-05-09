@@ -1,3 +1,7 @@
+import normalize from './normalize'
+import filterUniqueNames from './filterUniqueNames'
+import SuspenseFallback from './SuspenseFallback'
+
 // // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
 // function debounce(fn, ms, leading = true) {
 //   let timeout
@@ -16,27 +20,6 @@
 //     now && execute()
 //   }
 // }
-function debounce(func, wait, immediate) {
-  var timeout
-
-  return function executedFunction() {
-    var context = this
-    var args = arguments
-
-    var later = function() {
-      timeout = null
-      if (!immediate) func.apply(context, args)
-    }
-
-    var callNow = immediate && !timeout
-
-    clearTimeout(timeout)
-
-    timeout = setTimeout(later, wait)
-
-    if (callNow) func.apply(context, args)
-  }
-}
 
 const imageWidth = 375
 const imageHeight = 280
@@ -45,77 +28,11 @@ const getWidth = width =>
   Math.max(imageWidth, ~~(width / getColumnCount(width, 0))) - 10
 const getHeight = width => imageHeight
 
-function buildTagObjects(localNames) {
-  const tags = [
-    ...new Set(
-      localNames.reduce((acc, name) => acc.concat(name.tags.split(', ')), [])
-    ),
-  ]
-
-  return tags.map(tag => {
-    return {
-      type: tag.toLowerCase(),
-      payload: [
-        ...localNames
-          .filter(o => o.tags.includes(tag))
-          .map(o => ({
-            image: o.image,
-            title: o.title,
-            tags: o.tags,
-          })),
-      ],
-    }
-  })
-}
-
-function buildTitleObjects(localNames) {
-  const titles = [
-    ...new Set(localNames.reduce((acc, name) => acc.concat(name.title), [])),
-  ]
-
-  return titles.map(title => {
-    return {
-      type: title.toLowerCase(),
-      payload: [
-        ...localNames
-          .filter(o => o.title === title)
-          .map(o => ({
-            image: o.image,
-            title: o.title,
-            tags: o.tags,
-          })),
-      ],
-    }
-  })
-}
-
-// Normalize undraw JSON files
-// Demo: https://repl.it/@dance2die/Normalizr-for-undraw-data
-function normalize(localNames) {
-  const tagObjects = buildTagObjects(localNames)
-  const titleObjects = buildTitleObjects(localNames)
-
-  return [...tagObjects, ...titleObjects]
-}
-
-/**
- *
- * @param {Array} foundNames - an array of `{image: string, type: string, tags: string}`
- */
-function filterUniqueNames(foundNames) {
-  return Object.values(
-    foundNames.reduce((acc, o) => {
-      if (!acc[o.title]) acc[o.title] = o
-      return acc
-    }, new Map())
-  )
-}
-
 export {
   normalize,
   getColumnCount,
   getWidth,
   getHeight,
   filterUniqueNames,
-  debounce,
+  SuspenseFallback,
 }

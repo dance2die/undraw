@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState, lazy } from 'react'
 import { render } from 'react-dom'
 import useTrie from '@cshooks/usetrie'
 
@@ -6,12 +6,11 @@ import { normalize, filterUniqueNames } from './utils'
 import localNames from './data/undraw-local.json'
 import FileNamesContext from './components/FileNamesContext'
 import Search from './components/Search'
-import Images from './components/Images'
+import { SuspenseFallback } from './utils'
 
 import './styles/index.scss'
 
-const log = console.log
-
+const Images = lazy(() => import(`./components/Images`))
 const normalizedNames = normalize(localNames)
 
 function App() {
@@ -40,7 +39,9 @@ function App() {
   return (
     <FileNamesContext.Provider value={fileNames}>
       <Search filterByQuery={filterByQuery} />
-      <Images />
+      <Suspense fallback={<SuspenseFallback />}>
+        <Images />
+      </Suspense>
     </FileNamesContext.Provider>
   )
 }
