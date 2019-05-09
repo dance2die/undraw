@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 
 import './Search.scss'
 
 function Search({ filterByQuery }) {
   const [query, setQuery] = useState('')
+  const queryRef = useRef(undefined)
+
+  useLayoutEffect(() => queryRef.current.focus(), [])
 
   const onSubmit = e => {
     e.preventDefault()
@@ -29,6 +32,7 @@ function Search({ filterByQuery }) {
       <h1 className='title'>Search Undraw Images</h1>
       <form onSubmit={onSubmit}>
         <input
+          ref={queryRef}
           value={query}
           type='text'
           onKeyDown={onEscape}
