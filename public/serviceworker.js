@@ -1,7 +1,8 @@
-const version = 'v0.0.13'
+const version = 'v0.1.0'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
-const cacheList = [staticCacheName, imageCacheName]
+const pagesCacheName = `pages`
+const cacheList = [staticCacheName, imageCacheName, pagesCacheName]
 
 const log = console.log
 
@@ -24,7 +25,11 @@ addEventListener('install', function(installEvent) {
         staticCache.addAll(optionalCaches)
 
         // must haves...
-        const mustCaches = [`/offline.html`, `/images/svg/fallback.svg`]
+        const mustCaches = [
+          `bundle.js`,
+          `/offline.html`,
+          `/images/svg/fallback.svg`,
+        ]
         return staticCache.addAll(mustCaches)
       })
       .catch(error => log(`Error retrieving ${staticCacheName}`))
@@ -51,7 +56,24 @@ addEventListener('fetch', function(fetchEvent) {
 
   if (request.headers.get(`Accept`).includes(`text/html`)) {
     fetchEvent.respondWith(
-      fetch(request).catch(error => caches.match(`/offline.html`))
+      fetch(request)
+        .then(fetchResponse => {
+          const copy = fetchResponse.clone()
+          fetchEvent.waitUntil(
+            caches
+              .open(pagesCacheName)
+              .then(pagesCache => pagesCache.put(request, copy))
+          )
+
+          return fetchResponse
+        })
+        .catch(error => {
+          return caches
+            .match(request)
+            .then(
+              cacheResponse => cacheResponse || caches.match(`/offline.html`)
+            )
+        })
     )
   } else if (request.headers.get(`Accept`).includes(`image`)) {
     fetchEvent.respondWith(
