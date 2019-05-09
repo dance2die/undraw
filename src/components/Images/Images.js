@@ -7,6 +7,8 @@ import FileNamesContext from '../FileNamesContext'
 import Cell from './Cell'
 import NoResult from './NoResult'
 
+import './Images.scss'
+
 const Images = () => {
   const fileNames = useContext(FileNamesContext)
   const [scrollOffset, setScrollOffset] = useState(0)

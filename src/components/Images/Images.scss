@@ -1,0 +1,45 @@
+.image {
+  position: relative;
+  border: 0.1px solid rgba(0, 0, 0, 0.2);
+
+  & img {
+    padding-top: 3.3rem;
+  }
+
+  & .title {
+    text-align: center;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 22px;
+  }
+
+  & .overlay {
+    display: none;
+    position: relative;
+
+    & .tags {
+      position: absolute;
+      padding: 0 2rem 0;
+    }
+
+    &.hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+
+      line-height: 2.5rem;
+      word-spacing: 0.5rem;
+      letter-spacing: 0.05rem;
+
+      height: 50%;
+      width: 100%;
+
+      position: absolute;
+      text-align: center;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.66);
+      color: white;
+    }
+  }
+}

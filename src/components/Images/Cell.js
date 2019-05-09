@@ -5,6 +5,7 @@ import FileNamesContext from '../FileNamesContext'
 
 const Image = ({ style, file: { image, tags, title } }) => {
   const [hover, setHover] = useState(false)
+  const imageUrl = `../images/svg/${image}`
 
   return (
     <section
@@ -16,13 +17,14 @@ const Image = ({ style, file: { image, tags, title } }) => {
       <article>
         <img
           style={{ width: '100%', height: '60%' }}
-          src={`../images/svg/${image}`}
+          src={imageUrl}
           alt={title}
         />
         <div
           style={{ width: style.width }}
           className={`overlay${hover ? ' hover' : ''}`}
         >
+          <a className='download' href={imageUrl} download />
           <span className='tags'>{tags}</span>
         </div>
       </article>
