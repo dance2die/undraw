@@ -8,5 +8,5 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["react-hot-loader/babel", "@babel/plugin-syntax-dynamic-import"]
+  "plugins": ["react-hot-loader/babel"]
 }
