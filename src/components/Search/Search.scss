@@ -1,1 +1,26 @@
 @import '../../styles/variables';
+
+.search {
+  background-color: antiquewhite;
+  height: 25vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & h1 {
+    margin-bottom: 2rem;
+  }
+
+  & input[type='text'] {
+    width: 45vw;
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  &.title {
+    font-size: 3rem;
+  }
+}

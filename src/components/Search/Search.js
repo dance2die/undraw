@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Search.scss'
+
 function Search({ filterByQuery }) {
   return (
     <section className='search'>
