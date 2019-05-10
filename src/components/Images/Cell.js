@@ -24,7 +24,7 @@ const Image = ({ style, file: { image, tags, title } }) => {
           style={{ width: style.width }}
           className={`overlay${hover ? ' hover' : ''}`}
         >
-          <a className='download' href={imageUrl} download>
+          <a className='download' href={imageUrl} download={title}>
             Download
           </a>
           <span className='tags'>{tags}</span>
