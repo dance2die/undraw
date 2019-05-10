@@ -1,8 +1,12 @@
 @import '../../styles/variables';
 
 .search {
-  background-color: antiquewhite;
   height: 25vh;
+  background: linear-gradient(
+      rgba(218, 172, 24, 0.29),
+      rgba(81, 177, 150, 0.95)
+    ),
+    url('../../../public/images/svg/user_flow_vr6w.svg');
 
   display: flex;
   justify-content: center;
@@ -14,6 +18,9 @@
       Sans-Serif;
     margin-bottom: 2rem;
     font-size: 3rem;
+    color: #21061199;
+    word-spacing: 1.5rem;
+    letter-spacing: 0.5rem;
   }
 
   & input[type='text'] {
@@ -21,6 +28,8 @@
     text-align: center;
     font-size: 2.5rem;
     padding: 0.5rem;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
   }
 
   @media #{$media-small} {
