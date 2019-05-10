@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react'
+import React, { memo, useState, useRef, useLayoutEffect } from 'react'
 
 import './Search.scss'
 
@@ -46,4 +46,4 @@ function Search({ filterByQuery }) {
   )
 }
 
-export default Search
+export default memo(Search)
