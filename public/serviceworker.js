@@ -1,4 +1,4 @@
-const version = 'v0.1.15'
+const version = 'v0.1.16'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const pagesCacheName = `pages`
@@ -50,7 +50,7 @@ addEventListener('activate', function(activateEvent) {
 addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
   const acceptHeader = request.headers.get('Accept')
-  const isScript = request.destination === 'script'
+  const isScript = request.url.includes('bundle.js')
   // log(
   //   `contentTypeHeader=${contentTypeHeader}, request.headers.get('Accept')=${request.headers.get(
   //     'Accept'

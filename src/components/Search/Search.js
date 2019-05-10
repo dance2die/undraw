@@ -15,6 +15,7 @@ function Search({ filterByQuery }) {
 
   const onChange = e => {
     const { value: query } = e.target
+
     filterByQuery(query)
     setQuery(query)
   }

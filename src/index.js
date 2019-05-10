@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { render } from 'react-dom'
 import useTrie from '@cshooks/usetrie'
 
-import { normalize, filterUniqueNames } from './utils'
+import { normalize, filterUniqueNames, debounce } from './utils'
 import localNames from './data/undraw-local.json'
 import FileNamesContext from './components/FileNamesContext'
 import Search from './components/Search'
@@ -33,9 +33,13 @@ function App() {
     setFileNames(hasNoResult ? localNames : uniqueNames)
   }
 
+  const filterByQueryCallback = useCallback(debounce(filterByQuery, 100), [
+    filterByQuery,
+  ])
+
   return (
     <FileNamesContext.Provider value={fileNames}>
-      <Search filterByQuery={filterByQuery} />
+      <Search filterByQuery={filterByQueryCallback} />
       <Images />
     </FileNamesContext.Provider>
   )

@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useContext, useState } from 'react'
 import { FixedSizeGrid as Grid } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 
-import { getColumnCount, getWidth, getHeight, debounce } from '../../utils'
+import { getColumnCount, getWidth, getHeight } from '../../utils'
 import FileNamesContext from '../FileNamesContext'
 import Cell from './Cell'
 import NoResult from './NoResult'
