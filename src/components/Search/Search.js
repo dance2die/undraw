@@ -1,30 +1,24 @@
-import React, { memo, useState, useRef, useLayoutEffect } from 'react'
+import React, { memo, useRef, useLayoutEffect } from 'react'
 
 import './Search.scss'
 
 function Search({ filterByQuery }) {
-  console.log(`Search is renredering...`)
-  const [query, setQuery] = useState('')
   const queryRef = useRef(undefined)
 
   useLayoutEffect(() => queryRef.current.focus(), [])
 
   const onSubmit = e => {
     e.preventDefault()
-    filterByQuery(query)
+    filterByQuery(queryRef.current.value)
   }
 
-  const onChange = e => {
-    const { value: query } = e.target
-
-    filterByQuery(query)
-    setQuery(query)
+  const onChange = () => {
+    filterByQuery(queryRef.current.value)
   }
 
   const ESCAPE_KEYCODE = 27
   const onEscape = ({ keyCode }) => {
     if (keyCode === ESCAPE_KEYCODE) {
-      setQuery('')
       filterByQuery('')
     }
   }
@@ -35,7 +29,6 @@ function Search({ filterByQuery }) {
       <form onSubmit={onSubmit}>
         <input
           ref={queryRef}
-          value={query}
           type='text'
           onKeyDown={onEscape}
           onChange={onChange}
