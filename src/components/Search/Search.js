@@ -20,6 +20,7 @@ function Search({ filterByQuery }) {
   const onEscape = ({ keyCode }) => {
     if (keyCode === ESCAPE_KEYCODE) {
       filterByQuery('')
+      queryRef.current.value = ''
     }
   }
 
