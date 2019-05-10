@@ -51,12 +51,12 @@ addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
   const acceptHeader = request.headers.get('Accept')
   const isScript = request.url.includes('/bundle.js')
-  log(
-    `isScript=${isScript}, request.headers.get('Accept')=${request.headers.get(
-      'Accept'
-    )} request`,
-    request
-  )
+  // log(
+  //   `isScript=${isScript}, request.headers.get('Accept')=${request.headers.get(
+  //     'Accept'
+  //   )} request`,
+  //   request
+  // )
 
   if (acceptHeader.includes(`text/html`)) {
     fetchEvent.respondWith(

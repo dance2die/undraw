@@ -3,6 +3,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react'
 import './Search.scss'
 
 function Search({ filterByQuery }) {
+  console.log(`Search is renredering...`)
   const [query, setQuery] = useState('')
   const queryRef = useRef(undefined)
 
