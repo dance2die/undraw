@@ -4,3 +4,5 @@ $media-small: 'screen and (max-width: 375px)';
 $media-medium: 'screen and (min-width: 376px) and (max-width: 768px)';
 // ipad pro
 $media-large: 'screen and (min-width: 769px) and (max-width: 1280px)';
+// Non-mobile
+$media-desktop-only: 'screen and (min-width: 769px)';

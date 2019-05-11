@@ -59,3 +59,14 @@ nav a {
     transform: translateY(-11px) rotate(-45deg);
   }
 }
+
+@media #{$media-desktop-only} {
+  .hamburger {
+    display: none;
+  }
+
+  .links {
+    display: block;
+    margin: 0;
+  }
+}
