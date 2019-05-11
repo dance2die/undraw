@@ -1,4 +1,5 @@
 import React, { memo, useRef, useLayoutEffect } from 'react'
+import Menu from '../Menu'
 
 import './Search.scss'
 
@@ -26,6 +27,7 @@ function Search({ filterByQuery }) {
 
   return (
     <section className='search'>
+      <Menu />
       <h1 className='title'>Search Undraw Images</h1>
       <form onSubmit={onSubmit}>
         <input
