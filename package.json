@@ -30,6 +30,7 @@
   "homepage": "https://github.com/dance2die/undraw#readme",
   "dependencies": {
     "@cshooks/usetrie": "^1.0.8",
+    "@reach/router": "^1.2.1",
     "react": "^16",
     "react-dom": "^16",
     "react-hot-loader": "^4.8.4",

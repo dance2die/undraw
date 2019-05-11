@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { render } from 'react-dom'
+import { Router } from '@reach/router'
 import useTrie from '@cshooks/usetrie'
 
 import { normalize, filterUniqueNames, debounce } from './utils'
@@ -38,10 +39,12 @@ function App() {
   ])
 
   return (
-    <FileNamesContext.Provider value={fileNames}>
-      <Search filterByQuery={filterByQueryCallback} />
-      <Images />
-    </FileNamesContext.Provider>
+    <>
+      <FileNamesContext.Provider value={fileNames}>
+        <Search filterByQuery={filterByQueryCallback} />
+        <Images />
+      </FileNamesContext.Provider>
+    </>
   )
 }
 
