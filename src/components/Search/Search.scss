@@ -9,18 +9,27 @@
     url('../../../public/images/svg/user_flow_vr6w.svg');
 
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
 
   & h1 {
     font-family: 'Dosis', Lato, 'Lucida Grande', 'Lucida Sans Unicode', Tahoma,
       Sans-Serif;
-    margin-bottom: 2rem;
+
     font-size: 3rem;
     color: #21061199;
     word-spacing: 1.5rem;
     letter-spacing: 0.5rem;
+
+    color: white;
+    background: radial-gradient(
+      circle,
+      rgba(32, 28, 28, 0.75) 0%,
+      rgba(16, 23, 25, 0.75) 50%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    padding: 10px 15px 0 15px;
   }
 
   & input[type='text'] {
@@ -37,7 +46,6 @@
       font-size: 2rem;
       word-spacing: 0rem;
       letter-spacing: 0.3rem;
-      margin: 3rem 0 2rem 0;
     }
     & input[type='text'] {
       width: 75vw;
