@@ -9,6 +9,9 @@ function Menu() {
 
   return (
     <nav className='menu'>
+      <section className={`links${isClicked ? ' selected' : ''}`}>
+        <Link to='/About'>About</Link>
+      </section>
       <section
         className={`hamburger${isClicked ? ' selected' : ''}`}
         onClick={toggleLinks}
@@ -16,9 +19,6 @@ function Menu() {
         <div className='bar1' />
         <div className='bar2' />
         <div className='bar3' />
-      </section>
-      <section className='links'>
-        <Link to='/About'>About</Link>
       </section>
     </nav>
   )
