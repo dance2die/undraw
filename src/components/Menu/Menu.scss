@@ -8,6 +8,16 @@
   right: 20px;
 }
 
+nav a {
+  font-size: 1.7rem;
+  text-decoration: none;
+  color: #000;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .hamburger {
   &:hover {
     cursor: pointer;
