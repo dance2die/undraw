@@ -3,8 +3,8 @@
 .menu {
   display: flex;
   align-items: center;
-  align-self: flex-end;
   padding-right: 10px;
+  align-self: flex-end;
 }
 
 nav a {
@@ -67,5 +67,9 @@ nav a {
   .links {
     display: block;
     margin: 0;
+  }
+
+  .menu {
+    align-self: center;
   }
 }
