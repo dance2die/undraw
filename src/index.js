@@ -13,7 +13,7 @@ import './styles/index.scss'
 
 const normalizedNames = normalize(localNames)
 
-function App() {
+function Home() {
   const trie = useTrie(normalizedNames, false, o => o.type)
   const [fileNames, setFileNames] = useState(localNames)
 
@@ -39,12 +39,18 @@ function App() {
   ])
 
   return (
-    <>
-      <FileNamesContext.Provider value={fileNames}>
-        <Search filterByQuery={filterByQueryCallback} />
-        <Images />
-      </FileNamesContext.Provider>
-    </>
+    <FileNamesContext.Provider value={fileNames}>
+      <Search filterByQuery={filterByQueryCallback} />
+      <Images />
+    </FileNamesContext.Provider>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <Home path='/' />
+    </Router>
   )
 }
 
