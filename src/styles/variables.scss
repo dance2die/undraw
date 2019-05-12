@@ -6,3 +6,10 @@ $media-medium: 'screen and (min-width: 376px) and (max-width: 768px)';
 $media-large: 'screen and (min-width: 769px) and (max-width: 1280px)';
 // Non-mobile
 $media-desktop-only: 'screen and (min-width: 769px)';
+
+$title-background-image: radial-gradient(
+  circle,
+  rgba(32, 28, 28, 0.65) 0%,
+  rgba(16, 23, 25, 0.55) 50%,
+  rgba(0, 0, 0, 0.55) 100%
+);

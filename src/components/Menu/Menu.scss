@@ -36,7 +36,7 @@ nav a {
     right: -1px;
     background-color: rgba(0, 0, 0, 0.85);
     width: 100vw;
-    height: 25.3vh;
+    height: 33vh;
     justify-content: center;
     align-items: center;
   }
@@ -85,11 +85,18 @@ nav a {
     margin: 0;
 
     & a {
-      color: black;
+      color: white;
+
+      &:hover {
+        background-color: #e91e63;
+      }
     }
   }
 
   .menu {
     align-self: center;
+    background-image: $title-background-image;
+    height: 100%;
+    border-left: 10px solid #ffeb3b;
   }
 }

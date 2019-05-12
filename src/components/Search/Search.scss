@@ -30,12 +30,7 @@
     letter-spacing: 0.5rem;
 
     color: white;
-    background: radial-gradient(
-      circle,
-      rgba(32, 28, 28, 0.65) 0%,
-      rgba(16, 23, 25, 0.55) 50%,
-      rgba(0, 0, 0, 0.55) 100%
-    );
+    background-image: $title-background-image;
     padding: 10px 15px 0 15px;
     border-bottom: 10px solid black;
   }
