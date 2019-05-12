@@ -11,7 +11,7 @@ function Menu() {
     <nav className='menu'>
       <section className={`links${isClicked ? ' selected' : ''}`}>
         <Link to='/'>Home</Link>
-        <Link to='/About'>About</Link>
+        <Link to='/about'>About</Link>
       </section>
       <section
         className={`hamburger${isClicked ? ' selected' : ''}`}
