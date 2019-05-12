@@ -5,6 +5,10 @@
   align-items: center;
   padding-right: 10px;
   align-self: flex-end;
+  position: relative;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 }
 
 nav a {
@@ -28,11 +32,26 @@ nav a {
   margin: 0 0 0 20px;
 
   &.selected {
-    display: block;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    top: 2px;
+    right: 10px;
+    background-image: radial-gradient(
+      circle,
+      rgba(32, 28, 28, 0.95) 0%,
+      rgba(16, 23, 25, 0.85) 50%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
   }
 
   & a {
     padding: 20px;
+    color: white;
   }
 }
 
@@ -48,6 +67,11 @@ nav a {
 
 .selected {
   transition: 0.4s;
+
+  div {
+    background-color: white;
+  }
+
   .bar1 {
     transform: translateY(11px) rotate(45deg);
   }
