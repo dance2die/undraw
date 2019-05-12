@@ -13,6 +13,13 @@
   align-items: center;
   flex-direction: column;
 
+  & header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
   & h1 {
     font-family: 'Dosis', Lato, 'Lucida Grande', 'Lucida Sans Unicode', Tahoma,
       Sans-Serif;
@@ -44,9 +51,11 @@
 
   @media #{$media-small} {
     & h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       word-spacing: 0rem;
       letter-spacing: 0.3rem;
+
+      margin-left: 10px;
     }
     & input[type='text'] {
       width: 75vw;
@@ -55,9 +64,11 @@
 
   @media #{$media-medium} {
     & h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       word-spacing: 0.5rem;
       letter-spacing: 0.3rem;
+
+      margin-left: 10px;
     }
     & input[type='text'] {
       width: 75vw;

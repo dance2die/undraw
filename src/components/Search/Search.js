@@ -27,8 +27,10 @@ function Search({ filterByQuery }) {
 
   return (
     <section className='search'>
-      <Menu />
-      <h1 className='title'>Search Undraw Images</h1>
+      <header>
+        <Menu />
+        <h1 className='title'>Search Undraw Images</h1>
+      </header>
       <form onSubmit={onSubmit}>
         <input
           ref={queryRef}
