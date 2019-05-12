@@ -83,6 +83,10 @@ nav a {
   .links {
     display: block;
     margin: 0;
+
+    & a {
+      color: black;
+    }
   }
 
   .menu {
