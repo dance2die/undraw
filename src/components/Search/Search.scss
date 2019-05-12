@@ -15,7 +15,7 @@
 
   & header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
   }
@@ -41,7 +41,7 @@
   }
 
   & input[type='text'] {
-    width: 45vw;
+    width: 65vw;
     text-align: center;
     font-size: 2.5rem;
     padding: 0.5rem;
@@ -50,6 +50,9 @@
   }
 
   @media #{$media-small} {
+    & header {
+      justify-content: space-between;
+    }
     & h1 {
       font-size: 1.8rem;
       word-spacing: 0rem;
@@ -58,11 +61,14 @@
       margin-left: 10px;
     }
     & input[type='text'] {
-      width: 75vw;
+      width: 97vw;
     }
   }
 
   @media #{$media-medium} {
+    & header {
+      justify-content: space-between;
+    }
     & h1 {
       font-size: 2rem;
       word-spacing: 0.5rem;
@@ -71,7 +77,7 @@
       margin-left: 10px;
     }
     & input[type='text'] {
-      width: 75vw;
+      width: 95vw;
     }
   }
 }
