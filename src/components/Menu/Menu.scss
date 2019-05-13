@@ -1,5 +1,7 @@
 @import '../../styles/variables';
 
+$selected-link-background-color: #e91e63;
+
 .menu {
   display: flex;
   align-items: center;
@@ -88,7 +90,11 @@ nav a {
       color: white;
 
       &:hover {
-        background-color: #e91e63;
+        background-color: $selected-link-background-color;
+      }
+
+      & .selected {
+        background-color: $selected-link-background-color;
       }
     }
   }

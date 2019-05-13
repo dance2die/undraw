@@ -3,6 +3,21 @@ import { Link } from '@reach/router'
 
 import './Menu.scss'
 
+// https://reach.tech/router/example/active-links
+const NavLink = props => (
+  <Link
+    {...props}
+    getProps={props => {
+      console.log(`NavLink props`, props)
+      const { isCurrent } = props
+
+      return {
+        className: isCurrent ? 'selected' : '',
+      }
+    }}
+  />
+)
+
 function Menu() {
   const [isClicked, setIsClicked] = useState(false)
   const toggleLinks = () => setIsClicked(isClicked => !isClicked)
@@ -10,8 +25,7 @@ function Menu() {
   return (
     <nav className='menu'>
       <section className={`links${isClicked ? ' selected' : ''}`}>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>About</Link>
+        <NavLink to='/about'>About</NavLink>
       </section>
       <section
         className={`hamburger${isClicked ? ' selected' : ''}`}
