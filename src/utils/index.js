@@ -1,5 +1,6 @@
 import normalize from './normalize'
 import filterUniqueNames from './filterUniqueNames'
+import ExternalLink from './ExternalLink'
 
 // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
 // function debounce(fn, ms, leading = true) {
@@ -81,4 +82,5 @@ export {
   getHeight,
   filterUniqueNames,
   debounce,
+  ExternalLink,
 }
