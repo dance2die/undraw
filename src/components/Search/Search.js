@@ -29,7 +29,7 @@ function Search({ filterByQuery }) {
     <section className='search'>
       <header>
         <Menu />
-        <h1 className='title'>Search Undraw Images</h1>
+        <h1 className='title'>🔎Search Undraw Images</h1>
       </header>
       <form onSubmit={onSubmit}>
         <input
