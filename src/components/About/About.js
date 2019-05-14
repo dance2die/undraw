@@ -70,7 +70,7 @@ function About() {
   return (
     <article className='about'>
       <Link className='go-back' to='/'>
-        🔙 Home
+        🔙 Go Back
       </Link>
       <div className='box'>
         <AboutWhat />
