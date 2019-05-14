@@ -1,5 +1,9 @@
 import React from 'react'
+import { Link } from '@reach/router'
+
 import { ExternalLink } from '../../utils'
+
+import './About.scss'
 
 function AboutWhat() {
   return (
@@ -9,12 +13,11 @@ function AboutWhat() {
         This is an Offline-first (Cache first, then network PWA strategy){' '}
         <ExternalLink url='https://developers.google.com/web/progressive-web-apps/'>
           PWA (Progressive Web App)
-        </ExternalLink>
+        </ExternalLink>{' '}
         for searching for{' '}
         <ExternalLink url='https://undraw.co/illustrations'>
-          Undraw Illustrations
+          Undraw Illustrations.
         </ExternalLink>
-        .
       </p>
       <i>Yes, this site works offline~</i>
     </section>
@@ -65,11 +68,16 @@ function AboutLicense() {
 
 function About() {
   return (
-    <>
-      <AboutWhat />
-      <AboutCredit />
-      <AboutLicense />
-    </>
+    <article className='about'>
+      <Link className='go-back' to='/'>
+        🔙 Home
+      </Link>
+      <div className='box'>
+        <AboutWhat />
+        <AboutCredit />
+        <AboutLicense />
+      </div>
+    </article>
   )
 }
 
