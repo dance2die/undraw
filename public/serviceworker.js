@@ -1,4 +1,4 @@
-const version = 'v0.2.12'
+const version = 'v0.3.0'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const pagesCacheName = `pages-${version}`
@@ -19,7 +19,7 @@ addEventListener('install', function(installEvent) {
           `/images/icons/apple-touch-icon.png`,
           `/images/icons/favicon-32x32.png`,
           `/images/icons/favicon-16x16.png`,
-          `/images/icons/site.webmanifest`,
+          `/manifest.json`,
           ,
         ]
         staticCache.addAll(optionalCaches)

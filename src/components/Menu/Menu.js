@@ -7,14 +7,9 @@ import './Menu.scss'
 const NavLink = props => (
   <Link
     {...props}
-    getProps={props => {
-      console.log(`NavLink props`, props)
-      const { isCurrent } = props
-
-      return {
-        className: isCurrent ? 'selected' : '',
-      }
-    }}
+    getProps={props => ({
+      className: props.isCurrent ? 'selected' : '',
+    })}
   />
 )
 
