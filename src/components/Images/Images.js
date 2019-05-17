@@ -56,7 +56,7 @@ const Images = () => {
   }
 
   return (
-    <div className='main' onKeyDown={handleKeyDown} tabIndex='0'>
+    <div role='main' className='main' onKeyDown={handleKeyDown} tabIndex='0'>
       {hasFiles && (
         <AutoSizer>
           {({ width, height }) => {

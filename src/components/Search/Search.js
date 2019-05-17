@@ -26,7 +26,7 @@ function Search({ filterByQuery }) {
   }
 
   return (
-    <section className='search'>
+    <section className='search' role='search'>
       <header>
         <Menu />
         <h1 className='title'>🔎Search Undraw Images</h1>
