@@ -30,7 +30,7 @@ const Image = ({ style, file: { image, tags, title } }) => {
           <span className='tags'>{tags}</span>
         </div>
       </article>
-      <h4 className='title'>{title}</h4>
+      <h2 className='title'>{title}</h2>
     </section>
   )
 }

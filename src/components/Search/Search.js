@@ -34,6 +34,7 @@ function Search({ filterByQuery }) {
       <form onSubmit={onSubmit}>
         <input
           ref={queryRef}
+          aria-label='Search Undraw Illustration'
           type='text'
           onKeyDown={onEscape}
           onChange={onChange}
