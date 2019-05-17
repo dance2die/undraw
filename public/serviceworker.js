@@ -1,4 +1,4 @@
-const version = 'v0.2.1'
+const version = 'v0.2.12'
 const staticCacheName = `staticfiles-${version}`
 const imageCacheName = `images`
 const pagesCacheName = `pages-${version}`
@@ -51,24 +51,14 @@ addEventListener('fetch', function(fetchEvent) {
   const request = fetchEvent.request
   const acceptHeader = request.headers.get('Accept')
   const isScript = request.url.includes('/bundle.js')
-  // log(
-  //   `isScript=${isScript}, request.headers.get('Accept')=${request.headers.get(
-  //     'Accept'
-  //   )} request`,
-  //   request
-  // )
+
+  // log(`request`, request, `acceptHeader`, acceptHeader, `isScript`, isScript)
 
   if (acceptHeader.includes(`text/html`)) {
     fetchEvent.respondWith(
       fetch(request)
         .then(fetchResponse => {
-          const copy = fetchResponse.clone()
-          fetchEvent.waitUntil(
-            caches
-              .open(pagesCacheName)
-              .then(pagesCache => pagesCache.put(request, copy))
-          )
-
+          fetchEvent.waitUntil(stashInCache(request, pagesCacheName))
           return fetchResponse
         })
         .catch(error => {
@@ -83,13 +73,7 @@ addEventListener('fetch', function(fetchEvent) {
     fetchEvent.respondWith(
       fetch(request)
         .then(fetchResponse => {
-          const copy = fetchResponse.clone()
-          fetchEvent.waitUntil(
-            caches
-              .open(pagesCacheName)
-              .then(pagesCache => pagesCache.put(request, copy))
-          )
-
+          fetchEvent.waitUntil(stashInCache(request, pagesCacheName))
           return fetchResponse
         })
         .catch(error => {
@@ -107,12 +91,7 @@ addEventListener('fetch', function(fetchEvent) {
           cacheResponse ||
           fetch(request)
             .then(fetchResponse => {
-              const copy = fetchResponse.clone()
-              fetchEvent.waitUntil(
-                caches
-                  .open(imageCacheName)
-                  .then(imageCache => imageCache.put(request, copy))
-              )
+              fetchEvent.waitUntil(stashInCache(request, imageCacheName))
               return fetchResponse
             })
             .catch(error => caches.match(`/images/svg/fallback.svg`))
@@ -131,3 +110,9 @@ addEventListener('fetch', function(fetchEvent) {
     )
   }
 })
+
+async function stashInCache(request, cacheName) {
+  const fetchResponse = await fetch(request)
+  const cache = await caches.open(cacheName)
+  return await cache.put(request, fetchResponse)
+}
