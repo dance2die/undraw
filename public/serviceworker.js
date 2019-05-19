@@ -6,6 +6,9 @@ const cacheList = [staticCacheName, imageCacheName, pagesCacheName]
 
 const log = console.log
 
+// https://developers.google.com/web/fundamentals/app-install-banners/
+let deferredPrompt
+
 addEventListener('install', function(installEvent) {
   skipWaiting()
 
